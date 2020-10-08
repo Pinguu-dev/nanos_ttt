@@ -1,6 +1,19 @@
 -- Spawns a WebUI with the HTML file you just created
 MainHUD = WebUI("Main HUD", "file:///UI/HUD/index.html", true)
 
+Events:on("UpdatePlayerFraction", function(fraction)
+	MainHUD:CallEvent("UpdateFraction", { fraction })
+	-- 0 = Preparing - 1 = Innocent - 2 = Traitor - 3 = Round Over
+end)
+
+Events:on("UpdatePlayerKarma", function(karma)
+	MainHUD:CallEvent("UpdateKarma", { karma })
+end)
+
+Events:on("UpdateRoundTimer", function(time)
+	MainHUD:CallEvent("UpdateRoundTimer", { time })
+end)
+
 -- When LocalPlayer spawns, sets an event on it to trigger when we possesses a new character, to store the local controlled character locally. This event is only called once, see Package:on("Load") to load it when reloading a package
 NanosWorld:on("SpawnLocalPlayer", function(local_player)
 	local_player:on("Possess", function(character)

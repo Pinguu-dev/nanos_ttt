@@ -38,20 +38,27 @@ Timer:SetTimeout(1000, function()
 				return
 			end
 
-			local pickedTraitor = table.Random(NanosWorld:GetPlayers())
-			pickedTraitor:SetValue("playerRole", ROLES.TRAITOR)
-			print("[INFO] ".. pickedTraitor:GetName() .." wurde als Traitor ausgewählt")
+			-- Rollen verteilen
 
-			Events:CallRemote("UpdatePlayerFraction", pickedTraitor, { ROLES.TRAITOR })
+			local player_count = #NanosWorld:GetPlayers()
+			
+			local traitor_count = math.ceil(player_count * TTTSettings.percent_traitors)
+			local detective_count = math.ceil(player_count * TTTSettings.percent_detectives)
 
-			for i,player in pairs(NanosWorld:GetPlayers()) do
-				-- Innocent HUD 
-				if(player ~= pickedTraitor) then
-					Events:CallRemote("UpdatePlayerFraction", player, { ROLES.INNOCENT })
-					player:SetValue("playerRole", ROLES.INNOCENT)
+			for k, player in pairs(NanosWorld:GetPlayers()) do
+				if (k <= traitor_count) then
+					SetPlayerRole(player, ROLES.TRAITOR)					
+		
+				elseif (player_count >= TTTSettings.min_players_detectives and k <= traitor_count + detective_count) then
+					SetPlayerRole(player, ROLES.DETECTIVE)
+		
+				else
+					SetPlayerRole(player, ROLES.INNOCENT)
+					
 				end
 
-				-- Spieler werden Neutral gesetzt
+				-- Charakter Einstellungen
+
 				local char = player:GetControlledCharacter()
 				if(char ~= nil) then
 					char:SetTeam(0)
@@ -60,7 +67,13 @@ Timer:SetTimeout(1000, function()
 					
                     Events:CallRemote("ResetHeal", player, { 100 })
 				end
+
+				-- Ende
+
+				print(player)
 			end
+			-- Ende 		
+
 		end
 	end
 	-- End Timer Funktion

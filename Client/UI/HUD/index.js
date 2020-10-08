@@ -50,9 +50,13 @@ Events.on("UpdateFraction", function(fraction) {
 		$(".fraction").html("Innocent");
 		$(".fraction").css("background-color", "#04750d");
 	} else if(fraction == 2) {
-		// Terrorist
+		// Traitor
 		$(".fraction").html("Traitor");
 		$(".fraction").css("background-color", "#a6240d");
+	} else if(fraction == 3) {
+		// Detective
+		$(".fraction").html("Detective");
+		$(".fraction").css("background-color", "#00008B");
 	} else {
 		// ERROR
 		$(".fraction").html("Round Over");

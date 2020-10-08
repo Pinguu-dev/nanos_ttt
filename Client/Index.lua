@@ -13,21 +13,8 @@ Client:on("Chat", function(text)
 	Events:CallRemote("TriggerCommandHandler", { text })
 end)
 
-Events:on("UpdatePlayerFraction", function(fraction)
-	MainHUD:CallEvent("UpdateFraction", { fraction })
-	-- 0 = Preparing - 1 = Innocent - 2 = Traitor - 3 = Round Over
-end)
-
-Events:on("UpdatePlayerKarma", function(karma)
-	MainHUD:CallEvent("UpdateKarma", { karma })
-end)
-
 Events:on("SendNoti", function(text, art)
 	MainHUD:CallEvent("SendNotification", { text, art })
-end)
-
-Events:on("UpdateRoundTimer", function(time)
-	MainHUD:CallEvent("UpdateRoundTimer", { time })
 end)
 
 Events:on("PlaySound", function(soundFile)

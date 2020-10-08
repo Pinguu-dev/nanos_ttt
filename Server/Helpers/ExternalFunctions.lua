@@ -60,3 +60,34 @@ function GetAlivePlayers()
     return alivePlayers
 end
 
+function SetPlayerRole(player, role)
+    player:SetData("playerRole", role)
+
+    if (role == ROLES.TRAITOR) then
+
+		Server:SendChatMessage(player, "You are now the TRAITOR!")
+		print("TRAITOR")
+
+	elseif (role == ROLES.DETECTIVE) then
+
+		Server:SendChatMessage(player, "You are now the DETECTIVE!")
+		print("DETECTIVE")
+
+	elseif (role == ROLES.INNOCENT) then
+
+		Server:SendChatMessage(player, "You are now the INNOCENT!")
+		print("INNOCENT")
+
+    end
+    
+    Events:CallRemote("UpdatePlayerFraction", player, { role })
+end
+
+function GetPlayerRole(player)
+    local role = ROLES.NONE
+    if(player:GetValue("playerRole") ~= nil) then
+        role = player:GetValue("playerRole")
+    end
+    return role
+end
+

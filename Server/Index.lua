@@ -15,7 +15,8 @@ Package:RequirePackage("NanosWorldWeapons")
 ROLES = {
 	NONE = 0,
 	INNOCENT = 1,
-	TRAITOR = 2
+	TRAITOR = 2,
+	DETECTIVE = 3
 }
 
 MATCH_STATES = {
@@ -33,7 +34,9 @@ TTT = {
 TTTSettings = {
 	preparing_time = 15, -- 15 Sekunden
 	match_time = 360, -- 6 Minuten
-	--percent_traitors = 0.25
+	percent_traitors = 0.25,
+	percent_detective = 0.15,
+	min_players_detectives = 10,
 }
 
 -- Importieren der unterschiedlichen Dateien
