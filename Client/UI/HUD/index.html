@@ -1,0 +1,59 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<script src="jquery-3.5.1.min.js"></script>		
+		<script src="notify.min.js"></script>
+
+		<script>$.notify.addStyle('grey', {
+			html: "<div><span data-notify-text/></div>",
+			classes: {
+			  base: {
+				"white-space": "nowrap",
+				"background-color": "rgba(0,0,0,0.5)",
+				"color": "#fff",
+				"padding-top": "5px",
+				"padding-bottom": "5px",
+				"padding-left": "10px",
+				"padding-right": "10px",
+				"border-radius": "10px"
+			  },
+			  superblue: {
+				"color": "white",
+				"background-color": "blue"
+			  }
+			}
+		  });</script>
+
+		<script src="index.js"></script>
+
+	
+	</head>
+	
+	<body>
+		<div id="ui">
+			<div class="fraction">
+				Preparing
+			</div>
+			<div class="round_time">
+				99:99
+			</div>
+			
+			<div id="progress_karma">
+				<div class="progressbar_karma"><span class="inner_karma_progress">0 Karma</span></div>				
+			</div>
+			
+			<div id="progress_hp">
+				<div class="progressbar_health"><span class="inner_hp_progress">100 HP</span></div>				
+			</div>
+
+		</div>
+		
+		<div id="weapon_ammo_container">
+			<span id="weapon_ammo_clip">30</span> <!-- Ammo Clip value -->
+			<span id="weapon_ammo_bag">/ 1000</span> <!-- Ammo Bag value -->
+		</div>
+	</body>
+
+</html>
