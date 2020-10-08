@@ -10,6 +10,11 @@ World:SetTime(12, 0)
 -- Spawns a WebUI with the HTML file you just created
 MainHUD = WebUI("Main HUD", "file:///UI/HUD/index.html", true)
 
+Client:on("Chat", function(text)
+	Package:Log("triggerIt")
+	Events:CallRemote("TriggerCommandHandler", { text })
+end)
+
 Events:on("UpdatePlayerFraction", function(fraction)
 	MainHUD:CallEvent("UpdateFraction", { fraction })
 	-- 0 = Preparing - 1 = Innocent - 2 = Traitor - 3 = Round Over

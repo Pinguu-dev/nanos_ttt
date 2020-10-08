@@ -45,6 +45,8 @@ Package:Require("Player/PlayerKarma.lua")
 Package:Require("Player/SpawnHandler.lua")
 Package:Require("Timers/RoundTimer.lua")
 Package:Require("Detector/DetectorHandler.lua")
+Package:Require("Helpers/CommandHandler.lua")
+Package:Require("Helpers/Commands.lua")
 
 -- Spawn all Weapons
 SpawnWeaponsInWorld()
