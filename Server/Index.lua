@@ -51,11 +51,6 @@ Package:Require("Helpers/Commands.lua")
 -- Spawn all Weapons
 SpawnWeaponsInWorld()
 
--- Test Funktion
-Server:on("Chat", function(player, text)
-	print("[TEST] player ".. player:GetName() .. " | Text: ".. text)
-end)
-
 -- Charakter wird gelöscht, wenn der Charakter vom Spieler getrennt wird und er Disconnected ist
 Player:on("UnPossess", function(player, character, is_player_disconnecting)
 	if (is_player_disconnecting) then
@@ -73,7 +68,6 @@ Player:on("Destroy", function(player)
 		if(player:GetValue("playerRole") == ROLES.TRAITOR) then
 			StopRound()
 			SendNotification("The round aborted because the traitor left the game", "error")
-
 			return
 		end
 
