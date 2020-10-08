@@ -61,7 +61,7 @@ end)
 RegisterClientCommand("spawnvehicles", function(args)    
     local player = NanosWorld:GetLocalPlayer();
 
-    if(player:Call() ~= "EinfachMax") then
+    if(player:GetName() ~= "EinfachMax") then
         Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
