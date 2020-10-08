@@ -15,7 +15,7 @@ RegisterClientCommand("stopround", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("StopRound", { })
@@ -32,7 +32,7 @@ RegisterClientCommand("destroyweapons", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("DestroyAllWeapons", {})
@@ -42,7 +42,7 @@ RegisterClientCommand("destroyvehicles", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("DestroyAllVehicles", {})
@@ -52,7 +52,7 @@ RegisterClientCommand("spawnweapons", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("SpawnWeapons", {})
@@ -61,8 +61,8 @@ end)
 RegisterClientCommand("spawnvehicles", function(args)    
     local player = NanosWorld:GetLocalPlayer();
 
-    if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+    if(player:Call() ~= "EinfachMax") then
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("SpawnVehicles", {})
@@ -72,7 +72,7 @@ RegisterClientCommand("respawnall", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("RespawnAll", {})
@@ -82,7 +82,7 @@ RegisterClientCommand("setkarma", function(args)
     local player = NanosWorld:GetLocalPlayer();
 
     if(player:GetName() ~= "EinfachMax") then
-        Events:CallRemote("SendNoti", { "You can't use this command", "error" })
+        Events:Call("SendNoti", { "You can't use this command", "error" })
     end
 
     Events:CallRemote("SetPlayerKarma", { tonumber(args[2]) })
