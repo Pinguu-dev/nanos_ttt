@@ -1,5 +1,6 @@
 Package:Require("KeyHandler.lua")
 Package:Require("Commands/CommandHandler.lua")
+Package:Require("TTT_Overlay.lua")
 
 World:SpawnDefaultSun()
 
@@ -42,6 +43,14 @@ Events:on("PlaySound", function(soundFile)
 		1, -- Volume
 		1 -- Pitch
 	)
+end)
+
+Player:on("VOIP", function(player, IsTalking)
+	if(IsTalking) then
+		Package:Log("Du redest")
+	else
+		Package:Log("Du hast aufgehört zu redne")
+	end
 end)
 
 -- When LocalPlayer spawns, sets an event on it to trigger when we possesses a new character, to store the local controlled character locally. This event is only called once, see Package:on("Load") to load it when reloading a package
