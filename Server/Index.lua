@@ -35,7 +35,7 @@ TTTSettings = {
 	preparing_time = 15, -- 15 Sekunden
 	match_time = 360, -- 6 Minuten
 	percent_traitors = 0.25,
-	percent_detective = 0.15,
+	percent_detectives = 0.13,
 	min_players_detectives = 10,
 }
 

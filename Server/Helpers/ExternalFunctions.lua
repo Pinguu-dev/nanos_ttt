@@ -61,7 +61,7 @@ function GetAlivePlayers()
 end
 
 function SetPlayerRole(player, role)
-    player:SetData("playerRole", role)
+    player:SetValue("playerRole", role)
 
     if (role == ROLES.TRAITOR) then
 
