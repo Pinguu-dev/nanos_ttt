@@ -67,3 +67,10 @@ Events.on("SendNotification", function(text, art) {
 	  });
 });
 
+Events.on("VoiceIcon", function(active) {
+	if(active) 
+		$("#voice_icon").css("display", "block")
+	else 
+		$("#voice_icon").css("display", "none")
+});
+
