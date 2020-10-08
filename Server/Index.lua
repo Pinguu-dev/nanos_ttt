@@ -31,7 +31,7 @@ TTT = {
 }
 
 TTTSettings = {
-	preparing_time = 30, -- 30 Sekunden
+	preparing_time = 15, -- 15 Sekunden
 	match_time = 360, -- 6 Minuten
 	--percent_traitors = 0.25
 }
@@ -47,6 +47,7 @@ Package:Require("Timers/RoundTimer.lua")
 Package:Require("Detector/DetectorHandler.lua")
 Package:Require("Helpers/CommandHandler.lua")
 Package:Require("Helpers/Commands.lua")
+Package:Require("Traitor/TraitorShop.lua")
 
 -- Spawn all Weapons
 SpawnWeaponsInWorld()

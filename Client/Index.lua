@@ -1,6 +1,7 @@
 Package:Require("KeyHandler.lua")
 Package:Require("HUDs/TTT_Overlay.lua")
 Package:Require("HUDs/MainHud.lua")
+Package:Require("Traitor/TraitorShop.lua")
 
 World:SpawnDefaultSun()
 

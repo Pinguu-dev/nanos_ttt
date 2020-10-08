@@ -92,3 +92,12 @@ RegisterServerCommand("pos", function(player, args)
     
     Server:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
 end)
+
+RegisterServerCommand("teleport", function(player, args)
+    local char = player:GetControlledCharacter()
+    char:SetLocation(Vector(-2700.62, -2365.31, 87.00))
+end)
+
+RegisterServerCommand("settraitor", function(player, args)
+    player:SetValue("playerRole", ROLES.TRAITOR)
+end)

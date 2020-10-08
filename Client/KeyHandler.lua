@@ -21,11 +21,7 @@ Client:on("KeyUp", function(KeyName, _, _)
 
 
     if(KeyName == "B") then
-
-      TraitorShop:SetVisible(not TraitorShopVisible)
-      Client:SetMouseEnabled(not TraitorShopVisible)
-      TraitorShopVisible = not TraitorShopVisible
-
+      Events:CallRemote("TraitorShop", {})
     end
 
 end)
