@@ -6,8 +6,7 @@ If you want to help, you can push a pull request. <3
 Thanks SyedMuhammad for the help! <3
 
 -- Script Infos --
-
-ROLES = {
+```ROLES = {
 	NONE = 0,
 	INNOCENT = 1,
 	TRAITOR = 2
@@ -19,4 +18,4 @@ MATCH_STATES = {
 	PREPAIRING = 2,
 	IN_PROGRESS = 3,
 	MATCH_OVER = 4
-}
+}```
