@@ -60,6 +60,7 @@ end)
 
 RegisterServerCommand("play", function(player, args)
     local character = player:GetControlledCharacter()
+	if(character == nil) then return end
 
     if(player:GetValue("lastAnim") ~= "" or player:GetValue("lastAnim") ~= nil) then
         character:StopAnimation("PolygonWorld::".. anim)
@@ -74,10 +75,20 @@ end)
 
 RegisterServerCommand("stop", function(player, args)
     local character = player:GetControlledCharacter()
+	if(character == nil) then return end
 
     if(player:GetValue("lastAnim") ~= "" or player:GetValue("lastAnim") ~= nil) then
         character:StopAnimation("PolygonWorld::".. lastAnim)
     end
 
     player:SetValue("lastAnim", "")
+end)
+
+RegisterServerCommand("pos", function(player, args)
+    local character = player:GetControlledCharacter()
+	if(character == nil) then return end
+
+    print("[POSITION] Saved Position: ".. dump(character:GetLocation()))
+    
+    Server:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
 end)
