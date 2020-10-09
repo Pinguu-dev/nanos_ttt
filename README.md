@@ -10,7 +10,8 @@ Thanks SyedMuhammad for the help! <3
 ROLES = {
 	NONE = 0,
 	INNOCENT = 1,
-	TRAITOR = 2
+	TRAITOR = 2,
+	DETECTIVE = 3
 }
 
 
