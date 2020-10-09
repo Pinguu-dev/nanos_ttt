@@ -37,7 +37,7 @@ function math.randomchoice(t)
     return table[index]
 end
 
-function Server:GetAlivePlayers()
+function Server:GetAlivePlayers() 
     local alivePlayers = 0
     for i,player in pairs(NanosWorld:GetPlayers()) do
         if(player:GetValue("playerAlive") ~= nil) then
@@ -50,41 +50,39 @@ function Server:GetAlivePlayers()
     return alivePlayers
 end
 
-function Server:SendNotification(message, type)
+function Server:SendNotification(message, type) 
     type = type or "info"
     Events:BroadcastRemote("SendNoti", { message, type })
 	Events:BroadcastRemote("PlaySound", { "PolygonWorld::ClickSound" })
 end
 
-function Server:GetAliveTraitors()
+function Server:GetAliveTraitors() 
     local alivePlayers = 0
     for i,player in pairs(NanosWorld:GetPlayers()) do
-            if(player:GetAlive() == true) then
-                if(player:GetRole() == ROLES.TRAITOR) then
-                    alivePlayers = alivePlayers + 1
-                end                
-            end
+        if(player:GetAlive() == true) then
+            if(player:GetRole() == ROLES.TRAITOR) then
+                alivePlayers = alivePlayers + 1
+            end                
+        end    
+    end
+
+    return alivePlayers
+end
+
+function Server:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
+    local alivePlayers = 0
+    for i,player in pairs(NanosWorld:GetPlayers()) do
+        if(player:GetAlive() == true) then
+            if(player:GetRole() == ROLES.INNOCENT or player:GetRole() == ROLES.DETECTIVE) then
+                alivePlayers = alivePlayers + 1
+            end                
         end
     end
 
     return alivePlayers
 end
 
-function Server:GetAliveInnocents() -- Detektive ist auch irgendwie Innocent
-    local alivePlayers = 0
-    for i,player in pairs(NanosWorld:GetPlayers()) do
-            if(player:GetAlive() == true) then
-                if(player:GetRole() == ROLES.INNOCENT or player:GetRole() == ROLES.DETECTIVE) then
-                    alivePlayers = alivePlayers + 1
-                end                
-            end
-        end
-    end
-
-    return alivePlayers
-end
-
-function Server:GiveRoleKarma(role, karma) then
+function Server:GiveRoleKarma(role, karma) 
     for i,player in pairs(NanosWorld:GetPlayers()) do
         if(player:GetRole() == role) then
             player:GiveKarma(karma)
@@ -92,7 +90,7 @@ function Server:GiveRoleKarma(role, karma) then
     end
 end
 
-function Server:RemoveRoleKarma(role, karma) then
+function Server:RemoveRoleKarma(role, karma) 
     for i,player in pairs(NanosWorld:GetPlayers()) do
         if(player:GetRole() == role) then
             player:RemoveKarma(karma)

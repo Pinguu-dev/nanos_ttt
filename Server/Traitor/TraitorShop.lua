@@ -7,7 +7,7 @@ TraitorTrigger:on("BeginOverlap", function(actor)
 
     if(player == nil) then return end
 
-    if(player:GetRole()) == ROLES.TRAITOR) then
+    if(player:GetRole() == ROLES.TRAITOR) then
         player:SetValue("playerTraitorShop", true)
         player:SendNotification("You can open the traitor shop with 'B'")
     end
