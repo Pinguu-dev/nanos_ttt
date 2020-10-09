@@ -14,7 +14,7 @@ character_meshes = {
 }
 
 -- Spawn System
-Player:on("Spawn", function(player)
+NanosPlayer:on("Spawn", function(player)
 	Server:BroadcastChatMessage("<blue>".. player:GetName() .."</> now wait for the start of the game!")
 
 	-- Spieler wird gehalten solang eine Runde läuft

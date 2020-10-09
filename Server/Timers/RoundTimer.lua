@@ -30,22 +30,22 @@ Timer:SetTimeout(1000, function()
 			Events:BroadcastRemote("PlaySound", { "PolygonWorld::RoundSound" }) -- Signalton
 			
 			TTT.match_state = MATCH_STATES.IN_PROGRESS
-			TTT.remaining_time = TTTSettings.match_time
+			TTT.remaining_time = TTTSettings.match_time			
+			
+			-- Rollen verteilen
 
-			if(table.Count(NanosWorld:GetPlayers()) < 2) then
+			local player_count = #NanosPlayer
+
+			if(player_count < 2) then
 				TTT.match_state = WARM_UP
 				Server:SendNotification("Not enough players to start a round", "error")
 				return
 			end
-
-			-- Rollen verteilen
-
-			local player_count = #NanosWorld:GetPlayers()
 			
 			local traitor_count = math.ceil(player_count * TTTSettings.percent_traitors)
 			local detective_count = math.ceil(player_count * TTTSettings.percent_detectives)
 
-			for k, player in pairs(NanosWorld:GetPlayers()) do
+			for k, player in pairs(NanosPlayer) do
 				if (k <= traitor_count) then
 					player:SetRole(ROLES.TRAITOR)				
 					print("[INFO] ".. player:GetName() .." is traitor")

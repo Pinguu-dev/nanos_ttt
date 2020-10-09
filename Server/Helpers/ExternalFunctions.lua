@@ -39,9 +39,9 @@ end
 
 function Server:GetAlivePlayers() 
     local alivePlayers = 0
-    for i,player in pairs(NanosWorld:GetPlayers()) do
-        if(player:GetValue("playerAlive") ~= nil) then
-            if(player:GetValue("playerAlive") == true) then
+    for i,player in pairs(NanosPlayer) do
+        if(player:GetData("playerAlive") ~= nil) then
+            if(player:GetData("playerAlive") == true) then
                 alivePlayers = alivePlayers + 1
             end
         end
@@ -58,7 +58,7 @@ end
 
 function Server:GetAliveTraitors() 
     local alivePlayers = 0
-    for i,player in pairs(NanosWorld:GetPlayers()) do
+    for i,player in pairs(NanosPlayer) do
         if(player:GetAlive() == true) then
             if(player:GetRole() == ROLES.TRAITOR) then
                 alivePlayers = alivePlayers + 1
@@ -71,7 +71,7 @@ end
 
 function Server:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
     local alivePlayers = 0
-    for i,player in pairs(NanosWorld:GetPlayers()) do
+    for i,player in pairs(NanosPlayer) do
         if(player:GetAlive() == true) then
             if(player:GetRole() == ROLES.INNOCENT or player:GetRole() == ROLES.DETECTIVE) then
                 alivePlayers = alivePlayers + 1
@@ -83,7 +83,7 @@ function Server:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
 end
 
 function Server:GiveRoleKarma(role, karma) 
-    for i,player in pairs(NanosWorld:GetPlayers()) do
+    for i,player in pairs(NanosPlayer) do
         if(player:GetRole() == role) then
             player:GiveKarma(karma)
         end
@@ -91,7 +91,7 @@ function Server:GiveRoleKarma(role, karma)
 end
 
 function Server:RemoveRoleKarma(role, karma) 
-    for i,player in pairs(NanosWorld:GetPlayers()) do
+    for i,player in pairs(NanosPlayer) do
         if(player:GetRole() == role) then
             player:RemoveKarma(karma)
         end

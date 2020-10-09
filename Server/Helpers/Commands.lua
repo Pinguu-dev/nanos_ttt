@@ -62,11 +62,11 @@ RegisterServerCommand("play", function(player, args)
     local character = player:GetControlledCharacter()
 	if(character == nil) then return end
 
-    if(player:GetValue("lastAnim") ~= "" or player:GetValue("lastAnim") ~= nil) then
+    if(player:GetData("lastAnim") ~= "" or player:GetData("lastAnim") ~= nil) then
         character:StopAnimation("PolygonWorld::".. anim)
     end
 
-    player:SetValue("lastAnim", anim)
+    player:SetData("lastAnim", anim)
     
     character:PlayAnimation("PolygonWorld::".. anim, 0, true)
 
@@ -77,11 +77,11 @@ RegisterServerCommand("stop", function(player, args)
     local character = player:GetControlledCharacter()
 	if(character == nil) then return end
 
-    if(player:GetValue("lastAnim") ~= "" or player:GetValue("lastAnim") ~= nil) then
+    if(player:GetData("lastAnim") ~= "" or player:GetData("lastAnim") ~= nil) then
         character:StopAnimation("PolygonWorld::".. lastAnim)
     end
 
-    player:SetValue("lastAnim", "")
+    player:SetData("lastAnim", "")
 end)
 
 RegisterServerCommand("pos", function(player, args)

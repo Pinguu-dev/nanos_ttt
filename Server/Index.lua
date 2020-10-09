@@ -29,6 +29,7 @@ TTTSettings = {
 }
 
 -- Importieren der unterschiedlichen Dateien
+Package:Require("Helpers/PlayerFunctions.lua")
 Package:Require("Helpers/ExternalFunctions.lua")
 Package:Require("Helpers/MapSpawns.lua")
 Package:Require("Events/EventHelper.lua")
@@ -39,21 +40,20 @@ Package:Require("Detector/DetectorHandler.lua")
 Package:Require("Helpers/CommandHandler.lua")
 Package:Require("Helpers/Commands.lua")
 Package:Require("Traitor/TraitorShop.lua")
-Package:Require("Helpers/PlayerFunctions.lua")
 Package:Require("Player/DamageHandler.lua")
 
 -- Spawn all Weapons
 SpawnWeaponsInWorld()
 
 -- Charakter wird gelöscht, wenn der Charakter vom Spieler getrennt wird und er Disconnected ist
-Player:on("UnPossess", function(player, character, is_player_disconnecting)
+NanosPlayer:on("UnPossess", function(player, character, is_player_disconnecting)
 	if (is_player_disconnecting) then
 		character:Destroy()
 	end
 end)
 
 -- Wenn ein Spieler nicht mehr auf dem Server ist
-Player:on("Destroy", function(player)
+NanosPlayer:on("Destroy", function(player)
 	Server:BroadcastChatMessage("<red>".. player:GetName() .."</> has left the server!")
 
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
@@ -83,7 +83,7 @@ function TTT:StartRound()
 	Events:BroadcastRemote("UpdatePlayerFraction", { ROLES.NONE }) -- Spieler Rolle auf keine Rolle zurücksetzen
 	Events:BroadcastRemote("PlaySound", { "PolygonWorld::RoundSound" }) -- Sound für den Rundenbeginn abspielen
 
-	for i,player in pairs(NanosWorld:GetPlayers()) do
+	for i,player in pairs(NanosPlayer) do
 		local karma = player:GetKarma()
 		local damageReduce = 1000 - tonumber(karma)
 		damageReduce = damageReduce / 100
@@ -119,7 +119,7 @@ function TTT:StopRound()
 	end
 
 	-- Jeder Spieler wird neugespawnt
-	for i,player in pairs(NanosWorld:GetPlayers()) do
+	for i,player in pairs(NanosPlayer) do
 
 		player:SetVOIPMuted(false) -- Spieler darf wieder sprechen
 		player:SetAlive(true) -- Spieler ist wieder am Leben

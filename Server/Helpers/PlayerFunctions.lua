@@ -1,3 +1,10 @@
+--
+NanosPlayer = Player
+Player = inherit(DataObject)
+registerElementClass("Player", Player)
+--
+
+
 function Player:SetGodmode(state)
 	local char = self:GetControlledCharacter()
 	if(char == nil) then 
@@ -25,7 +32,7 @@ function Player:SendNotification(text, type)
 end
 
 function Player:SetRole(role)
-    self:SetValue("playerRole", role)
+    self:SetData("playerRole", role)
 
     if (role == ROLES.TRAITOR) then
 
@@ -48,33 +55,33 @@ function Player:SetRole(role)
 end
 
 function Player:GetRole()
-    local role = self:GetValue("playerRole") or ROLES.NONE
+    local role = self:GetData("playerRole") or ROLES.NONE
     return role
 end
 
 function Player:SetAlive(state)
-	self:SetValue("playerAlive", state)
+	self:SetData("playerAlive", state)
 end
 
 function Player:GetAlive()
-	local alive = self:GetValue("playerAlive") or false
+	local alive = self:GetData("playerAlive") or false
 	return alive
 end
 
 function Player:UpdateKarma()
-    local currentKarma = tonumber(self:GetValue("playerKarma")) or 0
+    local currentKarma = tonumber(self:GetData("playerKarma")) or 0
 
     Events:CallRemote("UpdatePlayerKarma", self, { currentKarma })
     print("[INFO] Karma updated for ".. self:GetName())
 end
 
 function Player:SetKarma(karma)
-    self:SetValue("playerKarma", karma)
-    UpdateKarma(self)
+    self:SetData("playerKarma", karma)
+    self:UpdateKarma()
 end
 
 function Player:GiveKarma(karma)
-    local currentKarma = tonumber(self:GetValue("playerKarma")) or 0
+    local currentKarma = tonumber(self:GetData("playerKarma")) or 0
 
     local newKarma = currentKarma + karma
 
@@ -82,12 +89,12 @@ function Player:GiveKarma(karma)
         newKarma = 1000
     end
 
-    self:SetValue("playerKarma", newKarma)
-    UpdateKarma(self)
+    self:SetData("playerKarma", newKarma)
+    self:UpdateKarma()
 end
 
 function Player:RemoveKarma(karma)
-    local currentKarma = tonumber(self:GetValue("playerKarma")) or 0
+    local currentKarma = tonumber(self:GetData("playerKarma")) or 0
 
     local newKarma = currentKarma - karma
 
@@ -95,6 +102,11 @@ function Player:RemoveKarma(karma)
         newKarma = 0
     end
 
-    self:SetValue("playerKarma", newKarma)
-    UpdateKarma(self)
+    self:SetData("playerKarma", newKarma)
+    self:UpdateKarma()
+end
+
+function Player:GetKarma()
+	local currentKarma = tonumber(self:GetData("playerKarma")) or 0
+	return currentKarma
 end

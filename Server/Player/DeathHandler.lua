@@ -60,7 +60,7 @@ Character:on("Death", function(character)
 		-- INNOCENT TÖTET UNSCHULDIGEN
 		if(player:GetRole() ~= ROLES.TRAITOR) then
 
-			local lastDamagePlayer = player:GetValue("TTT_LastDamager")
+			local lastDamagePlayer = player:GetData("TTT_LastDamager")
             if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end
 			
 			lastDamagePlayer:RemoveKarma(50) -- Innocent der diesen Spieler getötet hat, verliert 50 Karma
