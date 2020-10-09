@@ -6,7 +6,7 @@ If you want to help, you can push a pull request. <3
 Thanks SyedMuhammad for the help! <3
 
 -- Script Infos --
-```
+```LUA
 ROLES = {
 	NONE = 0,
 	INNOCENT = 1,
@@ -21,4 +21,30 @@ MATCH_STATES = {
 	IN_PROGRESS = 3,
 	MATCH_OVER = 4
 }
+```
+New functions for player
+```LUA
+Player:SetGodmode(Player self, boolean state)
+Player:SendNotification(Player self, string message, string type) -- type is optional
+Player:SetRole(Player self, integer bool) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+Player:GetRole(Player self)
+Player:SetAlive(Player self, boolean state) -- Setting up only a variable for TTT
+Player:GetAlive(Player self)
+Player:UpdateKarma(Player self)
+Player:SetKarma(Player self, integer karma)
+Player:RemoveKarma(Player self, integer karma)
+```
+New functions for server
+```LUA
+Server:SendNotification(string message, string type) -- type is optional
+Server:GetAlivePlayers()
+Server:GetAliveTraitors()
+Server:GetAliveInnocents()
+Server:GiveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+Server:RemoveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+```
+New TTT functions
+```LUA
+TTT:StartRound()
+TTT:StopRound()
 ```
