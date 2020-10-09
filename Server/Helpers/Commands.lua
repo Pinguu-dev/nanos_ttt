@@ -1,15 +1,15 @@
 RegisterServerCommand("stopround", function(player, args)
 	print("[Console] Round stopped by ".. player:GetName())
 
-	SendNotification("The round was stopped by admin", "error")
+	Server:SendNotification("The round was stopped by admin", "error")
 
-	StopRound(player)
+	TTT:StopRound()
 end)
 
 RegisterServerCommand("startround", function(player, args)
     print("[Console] Round started by ".. player:GetName())
     
-	StartRound(player)
+	TTT:StartRound()
 end)
 
 RegisterServerCommand("kill", function(player, args)
@@ -26,7 +26,7 @@ RegisterServerCommand("spawnweapons", function(player, args)
 
 	SpawnWeaponsInWorld()
 
-	SendPlayerNotification(player, "You spawn all weapons in the world")
+	player:SendNotification("You spawn all weapons in the world")
 end)
 
 RegisterServerCommand("spawnvehicles", function(player, args)
@@ -34,7 +34,7 @@ RegisterServerCommand("spawnvehicles", function(player, args)
 
 	SpawnVehiclesInWorld()
 
-	SendPlayerNotification(player, "You spawn all vehicles in the world")
+	player:SendNotification("You spawn all vehicles in the world")
 end)
 
 RegisterServerCommand("destroyweapons", function(player, args)
@@ -55,7 +55,7 @@ end)
 
 RegisterServerCommand("setkarma", function(player, args)
     print("[INFO] ".. player:GetName() .." set his karma to ".. args[2])
-    SetKarma(player, karma)
+    player:SetKarma(karma)
 end)
 
 RegisterServerCommand("play", function(player, args)
@@ -70,7 +70,7 @@ RegisterServerCommand("play", function(player, args)
     
     character:PlayAnimation("PolygonWorld::".. anim, 0, true)
 
-    SendPlayerNotification(player, "[ANIMATION] PolygonWorld::".. anim)
+    player:SendNotification("[ANIMATION] PolygonWorld::".. anim)
 end)
 
 RegisterServerCommand("stop", function(player, args)
@@ -99,5 +99,5 @@ RegisterServerCommand("teleport", function(player, args)
 end)
 
 RegisterServerCommand("settraitor", function(player, args)
-    player:SetValue("playerRole", ROLES.TRAITOR)
+    player:SetRole(ROLES.TRAITOR)
 end)

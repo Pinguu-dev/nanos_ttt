@@ -17,7 +17,7 @@ Timer:SetTimeout(1000, function()
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
 			Events:BroadcastRemote("TTT_InnoWonScreen", { true })		
 
-			SendNotification("Innocent have won the round, the time is over.", "success")
+			Server:SendNotification("Innocent have won the round, the time is over.", "success")
 
 			Timer:SetTimeout(5000, function()
 				Events:BroadcastRemote("TTT_InnoWonScreen", { false }) -- WIN wird wieder ausgeblendet
@@ -34,7 +34,7 @@ Timer:SetTimeout(1000, function()
 
 			if(table.Count(NanosWorld:GetPlayers()) < 2) then
 				TTT.match_state = WARM_UP
-				SendNotification("Not enough players to start a round")
+				Server:SendNotification("Not enough players to start a round", "error")
 				return
 			end
 
@@ -47,26 +47,19 @@ Timer:SetTimeout(1000, function()
 
 			for k, player in pairs(NanosWorld:GetPlayers()) do
 				if (k <= traitor_count) then
-					SetPlayerRole(player, ROLES.TRAITOR)					
-		
+					player:SetRole(ROLES.TRAITOR)				
+					print("[INFO] ".. player:GetName() .." is traitor")
 				elseif (player_count >= TTTSettings.min_players_detectives and k <= traitor_count + detective_count) then
-					SetPlayerRole(player, ROLES.DETECTIVE)
-		
+					player:SetRole(ROLES.DETECTIVE)	
+					print("[INFO] ".. player:GetName() .." is detective")
 				else
-					SetPlayerRole(player, ROLES.INNOCENT)
-					
+					player:SetRole(ROLES.INNOCENT)	
 				end
 
 				-- Charakter Einstellungen
 
-				local char = player:GetControlledCharacter()
-				if(char ~= nil) then
-					char:SetTeam(0)
-					char:SetMaxHealth(100)  
-					char:SetHealth(100) 
-					
-                    Events:CallRemote("ResetHeal", player, { 100 })
-				end
+				player:SetGodmode(false)					
+                Events:CallRemote("ResetHeal", player, { 100 })
 
 				-- Ende
 

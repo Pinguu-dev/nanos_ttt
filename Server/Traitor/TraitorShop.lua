@@ -7,9 +7,9 @@ TraitorTrigger:on("BeginOverlap", function(actor)
 
     if(player == nil) then return end
 
-    if(player:GetValue("playerRole") ~= nil and player:GetValue("playerRole") == ROLES.TRAITOR) then
+    if(player:GetRole()) == ROLES.TRAITOR) then
         player:SetValue("playerTraitorShop", true)
-        SendPlayerNotification(player, "You can open the traitor shop with 'B'")
+        player:SendNotification("You can open the traitor shop with 'B'")
     end
 end)
 
@@ -26,14 +26,12 @@ TraitorTrigger:on("EndOverlap", function(actor)
 
     if(player:GetValue("playerTraitorShop") == true) then
         player:SetValue("playerTraitorShop", false)
-        SendPlayerNotification(player, "You leave the traitor shop position")
+        player:SendNotification("You leave the traitor shop position")
     end
 end)
 
 Events:on("TraitorShop", function(player)
-    if(player:GetValue("playerRole") == nil or player:GetValue("playerRole") ~= ROLES.TRAITOR) then 
-        return 
-    end
+    if(player:GetRole() ~= ROLES.TRAITOR) then return end
     if(player:GetValue("playerTraitorShop") == nil or player:GetValue("playerTraitorShop") == false) then 
         return 
     end

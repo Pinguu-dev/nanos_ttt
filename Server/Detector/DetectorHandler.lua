@@ -16,10 +16,7 @@ DetectorTrigger:on("BeginOverlap", function(actor)
     local color = Color(1, 1, 1)
     local locations = Vector(-7193, 745, 208)
 
-    local role = player:GetValue("playerRole")
-    if(role == nil) then return end
-
-    if(role == ROLES.TRAITOR) then
+    if(player:GetRole() == ROLES.TRAITOR) then
         color = Color(1,0,0)
         locations = Vector(-7193,802,208)
     else
@@ -27,7 +24,7 @@ DetectorTrigger:on("BeginOverlap", function(actor)
         locations = Vector(-7193, 745, 208)
     end
 
-    local testDetectorLight = Light(
+    local DetectorLight = Light(
         locations,
         Rotator(0, 90, 90), 
         color, 
@@ -42,7 +39,7 @@ DetectorTrigger:on("BeginOverlap", function(actor)
     LightIsCreated = true
 
     Timer:SetTimeout(1000, function()
-        testDetectorLight:Destroy()
+        DetectorLight:Destroy()
         LightIsCreated = false
         return false
     end)

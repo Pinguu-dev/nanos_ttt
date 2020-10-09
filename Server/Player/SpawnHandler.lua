@@ -30,14 +30,14 @@ Player:on("Spawn", function(player)
 
 		player:SetVOIPChannel(1)
 		player:SetVOIPMuted(true)
-		player:SetValue("playerAlive", false)
-		SetKarma(player, 1000)
+		player:SetAlive(false)
+		player:SetKarma(1000)
 
-		SendPlayerNotification(player, "There is currently a round running, you have to wait until the round is finished")
+		player:SendNotification("There is currently a round running, you have to wait until the round is finished", "error")
 		return
 	end
 
-	SendPlayerNotification(player, "The round is started manually, wait for the round begin.", "info")
+	player:SendNotification("The round is started manually, wait for the round begin.")
 
     -- Charakter zuweisen
     local new_char = player:GetControlledCharacter()
@@ -58,18 +58,13 @@ Player:on("Spawn", function(player)
 	player:SetVOIPMuted(false) -- Spieler ist nicht gestummt, er lebt!	
 	
 	-- Alive Variable
-	player:SetValue("playerAlive", true)
+	player:SetAlive(true)
     
     -- Karma System
-	SetKarma(player, 1000)
+	player:SetKarma(1000)
 
     -- Unverwundbar machen
-	new_char:SetTeam(1) -- Niemand kann sich in diesem Team verletzen
-	new_char:SetMaxHealth(9999)  -- Ne art Godmode
-    new_char:SetHealth(9999) -- Ne art Godmode
-    
-    --
-	Events:CallRemote("ResetHeal", player, { 9999 })
+	player:SetGodmode(true)
 	
 	-- Start-Screen nur kurz anzeigen
 	Events:CallRemote("TTT_StartScreen", player, { true })	

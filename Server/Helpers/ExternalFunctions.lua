@@ -37,17 +37,7 @@ function math.randomchoice(t)
     return table[index]
 end
 
-function SendNotification(text, art)
-	Events:BroadcastRemote("SendNoti", { text, art })
-	Events:BroadcastRemote("PlaySound", { "PolygonWorld::ClickSound" })
-end
-
-function SendPlayerNotification(player, text, art)
-	Events:CallRemote("SendNoti", player, { text, art })
-	Events:CallRemote("PlaySound", player, { "PolygonWorld::ClickSound" })
-end
-
-function GetAlivePlayers()
+function Server:GetAlivePlayers()
     local alivePlayers = 0
     for i,player in pairs(NanosWorld:GetPlayers()) do
         if(player:GetValue("playerAlive") ~= nil) then
@@ -60,34 +50,52 @@ function GetAlivePlayers()
     return alivePlayers
 end
 
-function SetPlayerRole(player, role)
-    player:SetValue("playerRole", role)
-
-    if (role == ROLES.TRAITOR) then
-
-		Server:SendChatMessage(player, "You are now the TRAITOR!")
-		print("TRAITOR")
-
-	elseif (role == ROLES.DETECTIVE) then
-
-		Server:SendChatMessage(player, "You are now the DETECTIVE!")
-		print("DETECTIVE")
-
-	elseif (role == ROLES.INNOCENT) then
-
-		Server:SendChatMessage(player, "You are now the INNOCENT!")
-		print("INNOCENT")
-
-    end
-    
-    Events:CallRemote("UpdatePlayerFraction", player, { role })
+function Server:SendNotification(message, type)
+    type = type or "info"
+    Events:BroadcastRemote("SendNoti", { message, type })
+	Events:BroadcastRemote("PlaySound", { "PolygonWorld::ClickSound" })
 end
 
-function GetPlayerRole(player)
-    local role = ROLES.NONE
-    if(player:GetValue("playerRole") ~= nil) then
-        role = player:GetValue("playerRole")
+function Server:GetAliveTraitors()
+    local alivePlayers = 0
+    for i,player in pairs(NanosWorld:GetPlayers()) do
+            if(player:GetAlive() == true) then
+                if(player:GetRole() == ROLES.TRAITOR) then
+                    alivePlayers = alivePlayers + 1
+                end                
+            end
+        end
     end
-    return role
+
+    return alivePlayers
 end
 
+function Server:GetAliveInnocents() -- Detektive ist auch irgendwie Innocent
+    local alivePlayers = 0
+    for i,player in pairs(NanosWorld:GetPlayers()) do
+            if(player:GetAlive() == true) then
+                if(player:GetRole() == ROLES.INNOCENT or player:GetRole() == ROLES.DETECTIVE) then
+                    alivePlayers = alivePlayers + 1
+                end                
+            end
+        end
+    end
+
+    return alivePlayers
+end
+
+function Server:GiveRoleKarma(role, karma) then
+    for i,player in pairs(NanosWorld:GetPlayers()) do
+        if(player:GetRole() == role) then
+            player:GiveKarma(karma)
+        end
+    end
+end
+
+function Server:RemoveRoleKarma(role, karma) then
+    for i,player in pairs(NanosWorld:GetPlayers()) do
+        if(player:GetRole() == role) then
+            player:RemoveKarma(karma)
+        end
+    end
+end
