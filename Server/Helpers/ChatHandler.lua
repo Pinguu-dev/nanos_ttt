@@ -15,7 +15,7 @@ Events:on("Chat_SV_CheckMessage", function(player, message)
 	if(player:GetAlive() == false) then
 		-- Spieler ist nicht mehr am Leben und kann sich nur noch mit jedem Unterhalten der Tot ist
 		new_message = "<i>(DEAD)</i> <b style='color: grey;'>".. player:GetName() .."</b>: ".. message
-		for i,pp in pairs(Players) do
+		for i,pp in pairs(NanosPlayer) do
 			if(pp:GetAlive() == false) then
 				pp:SendPlayerMessage(new_message)
 			end

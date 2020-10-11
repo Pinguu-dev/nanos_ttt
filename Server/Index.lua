@@ -61,14 +61,14 @@ NanosPlayer:on("Destroy", function(player)
 		
 		-- Wenn Terrorist das Match verlässt
 		if(player:GetRole() == ROLES.TRAITOR) then
-			StopRound()
+			TTT:StopRound()
 			Server:SendNotification("The round aborted because the traitor left the game", "error")
 			return
 		end
 
 		-- Runde wird beendet wenn weniger wie zwei Spieler noch dabei sind
 		if(Server:GetAlivePlayers() < 2) then
-			StopRound()
+			TTT:StopRound()
 			Server:SendNotification("The round was cancelled because there are not enough players left", "error")
 		end
 
