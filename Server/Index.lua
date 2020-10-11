@@ -32,6 +32,7 @@ TTTSettings = {
 Package:Require("Helpers/PlayerFunctions.lua")
 Package:Require("Helpers/ExternalFunctions.lua")
 Package:Require("Helpers/MapSpawns.lua")
+Package:Require("Helpers/ChatHandler.lua")
 Package:Require("Events/EventHelper.lua")
 Package:Require("Player/DeathHandler.lua")
 Package:Require("Player/SpawnHandler.lua")

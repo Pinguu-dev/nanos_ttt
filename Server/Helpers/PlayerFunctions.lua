@@ -125,3 +125,8 @@ function Player:SpawnCharacter()
 
 	return new_char
 end
+
+function Player:SendPlayerMessage(player, message)
+	-- Send Message to player
+	Events:CallRemote("Chat_SendMessage", player, { message })
+end

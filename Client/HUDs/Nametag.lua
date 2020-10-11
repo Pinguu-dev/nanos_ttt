@@ -19,6 +19,8 @@ Timer:SetTimeout(150, function()
 
         if(actor:GetType() == "Character") then    
 
+            if(actor:GetPlayer() == NanosWorld:GetLocalPlayer()) then return end
+
             local owner = actor:GetValue("characterOwner")          
             if(showNametag == false) then
                 NametagUI:SetVisible(true)
