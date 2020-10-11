@@ -10,10 +10,18 @@ Timer:SetTimeout(100, function()
         Client:DrawDebugPoint(trace_result.Location, Color(1, 0, 0), 1, 1)  
 
          if(trace_result.Actor) then
-            local actor = trace_result.Actor
-            Package:Log("Actor")
-            if(actor:GetType() == "Prop") then        -- HIT  
-                Client:SendChatMessage("hit prop")
+            local actor = trace_result.Actor         
+            Package:Log(actor:GetType())
+            if(actor:GetType() == "Character") then        -- HIT  
+                Package:Log("Character")
+                Client:SendChatMessage("found character")
+                local owner = actor:GetValue("characterOwner")
+
+                if(owner == nil) then
+                    Client:SendChatMessage("error")
+                end
+
+                Client:SendChatMessage("Owner: ".. owner:GetName())
             end
         end
     end

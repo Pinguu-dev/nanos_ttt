@@ -110,3 +110,20 @@ function Player:GetKarma()
 	local currentKarma = tonumber(self:GetData("playerKarma")) or 0
 	return currentKarma
 end
+
+function Player:SpawnCharacter()
+	local spawnLocation = spawn_locations[math.random(#spawn_locations)]
+
+    local new_char = Character(spawnLocation, Rotator(), character_meshes[math.random(#character_meshes)])
+    new_char:SetInitialLocation(spawnLocation)
+    
+    self:Possess(new_char) 
+
+	new_char:SetScale(Vector(0.9, 0.9, 0.9))
+
+	self:SetAlive(true)
+
+	new_char:SetValue("characterOwner", self)
+
+	return new_char
+end

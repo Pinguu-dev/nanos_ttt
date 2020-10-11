@@ -127,8 +127,7 @@ function TTT:StopRound()
 		-- Charakter für die Toten erstellen
 		local char = nil		
 		if(player:GetControlledCharacter() == nil) then
-			char = Character(spawn_locations[math.random(#spawn_locations)], Rotator(), character_meshes[math.random(#character_meshes)])
-			player:Possess(char) 
+			char = player:SpawnCharacter()
 		else
 			char = player:GetControlledCharacter()
 			--char:SetLocation(spawn_locations[math.random(#spawn_locations)])
