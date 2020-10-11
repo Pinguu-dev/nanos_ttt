@@ -123,7 +123,5 @@ function Player:SpawnCharacter()
 
 	self:SetAlive(true)
 
-	new_char:SetValue("characterOwner", self)
-
 	return new_char
 end
