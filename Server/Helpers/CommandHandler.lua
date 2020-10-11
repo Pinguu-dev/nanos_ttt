@@ -1,11 +1,11 @@
 local commands = {}
 
-Server:on("Chat", function(player, text)
-    local args = splitString(string.sub(text, 2))
-    local command = args[1]
+Events:on("Chat_SV_CommandExecute", function(player, command)
+    print("command: ".. command)
+    local args = splitString(string.sub(command, 1))
 
-    if commands[command] then
-        commands[command](player, args)
+    if commands[args[1]] then
+        commands[args[1]](player, args)
         return false
     end
 end)

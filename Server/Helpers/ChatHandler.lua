@@ -1,3 +1,10 @@
+CustomChat = {}
+
+function CustomChat:SendMessage(message) 
+	-- Send Message to all
+	Events:BroadcastRemote("Chat_SendMessage", { message })
+end
+
 Events:on("Chat_SV_CheckMessage", function(player, message)
 	local new_message = "<b>".. player:GetName() .."</b>: ".. message
 
@@ -8,7 +15,7 @@ Events:on("Chat_SV_CheckMessage", function(player, message)
 	if(player:GetAlive() == false) then
 		-- Spieler ist nicht mehr am Leben und kann sich nur noch mit jedem Unterhalten der Tot ist
 		new_message = "<i>(DEAD)</i> <b style='color: grey;'>".. player:GetName() .."</b>: ".. message
-		for i,pp in pairs(NanosPlayers) do
+		for i,pp in pairs(Players) do
 			if(pp:GetAlive() == false) then
 				pp:SendPlayerMessage(new_message)
 			end
@@ -18,8 +25,3 @@ Events:on("Chat_SV_CheckMessage", function(player, message)
 
 	CustomChat:SendMessage(new_message)
 end)
-
-function CustomChat:SendMessage(message) 
-	-- Send Message to all
-	Events:BroadcastRemote("Chat_SendMessage", { message })
-end

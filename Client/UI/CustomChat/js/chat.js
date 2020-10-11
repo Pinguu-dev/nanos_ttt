@@ -12,6 +12,7 @@ let chat =
 
 Events.on("PushChat", function(msg) {
 	chatAPI.push(msg);
+	show();
 });
 
 Events.on("CallEnableChatInput", function() {
