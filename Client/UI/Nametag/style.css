@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+* {padding: 0; margin: 0; box-sizing: border-box; font-family: 'Tahoma'; font-size: 13px; text-shadow: 1px 1px #000; color: #fff; font-weight: bold; }
+body {
+	
+}
+
+#ui {
+	position: absolute;
+    width: 300px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px; /* margin is -0.5 * dimension */
+    margin-top: -25px; 
+	text-align: center;
+}
+
+.name {
+	margin-bottom: -12px;
+}
+
+.health {
+	color: rgba(0, 255, 0, 255);
+}
+
+.info {
+	display: none;
+	margin-top: -12px;
+}

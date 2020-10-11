@@ -7,12 +7,9 @@ spawn_locations = {
 
 -- Meshes
 character_meshes = {
-	"NanosWorld::SK_Male",
-    "NanosWorld::SK_Female",
     "NanosWorld::SK_PostApocalyptic",
     "NanosWorld::SK_ClassicMale",
 }
-
 -- Spawn System
 NanosPlayer:on("Spawn", function(player)
 	Server:BroadcastChatMessage("<blue>".. player:GetName() .."</> now wait for the start of the game!")
@@ -43,22 +40,12 @@ NanosPlayer:on("Spawn", function(player)
     local new_char = player:GetControlledCharacter()
 
     if(new_char == nil) then -- Spieler kontrolliert keinen Charakter mehr
-        local spawnLocation = spawn_locations[math.random(#spawn_locations)]
-
-        new_char = Character(spawnLocation, Rotator(), character_meshes[math.random(#character_meshes)])
-        new_char:SetInitialLocation(spawnLocation)
-    
-        player:Possess(new_char) -- Bindet Charakter an einen Spieler
+        player:SpawnCharacter()
     end   
 
-	new_char:SetScale(Vector(0.9, 0.9, 0.9))
-	
 	-- Random aussehen
 	player:SetVOIPChannel(1) -- Setzt den Spieler in den richtigen Voice-Chat
 	player:SetVOIPMuted(false) -- Spieler ist nicht gestummt, er lebt!	
-	
-	-- Alive Variable
-	player:SetAlive(true)
     
     -- Karma System
 	player:SetKarma(1000)

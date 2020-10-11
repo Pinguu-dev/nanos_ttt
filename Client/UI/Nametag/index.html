@@ -1,0 +1,56 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="jquery-3.5.1.min.js"></script>		
+		
+		<script>
+			Events.on("SetName", function(name, color) {
+				SetName(name, color);
+			});
+			
+			Events.on("SetHealthString", function(health) {
+				SetHealthString(health);
+			});
+		
+			function SetName(name, color = "#fff") {
+				$(".name").html(name);
+				$(".name").css("color", color);
+			}
+		
+			function SetHealthString(health) {
+				var maxhealth = 100;
+				
+				if(health > maxhealth * 0.9) {
+					$(".health").css("color", "rgba(0, 255, 0, 255)"); // Healthy
+					$(".health").html("Healthy");
+				}
+				else if(health > maxhealth * 0.7) {
+					$(".health").css("color", "rgba(170, 230, 10, 255)"); // Hurt
+					$(".health").html("Hurt");
+				}
+				else if(health > maxhealth * 0.45) {
+					$(".health").css("color", "rgba(230, 215, 10, 255)"); // Wounded
+					$(".health").html("Wounded");
+				}
+				else if(health > maxhealth * 0.2) {
+					$(".health").css("color", "rgba(255, 140, 0, 255)"); // Badwound
+					$(".health").html("Badwound");
+				}
+				else {
+					$(".health").css("color", "rgba(255, 0, 0, 255)"); // DEAD
+					$(".health").html("HE'S DEAD");
+				}
+			}
+		</script>	
+	</head>
+	
+	<body>
+		<div id="ui">
+			<div class="name">Dinkelberg</div><br />
+			<div class="health">Healthy</div><br />
+			<div class="info">Press E to search. ALT + E to search covertly.</div>
+		</div>
+	</body>
+
+</html>

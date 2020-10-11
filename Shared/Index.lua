@@ -11,3 +11,7 @@ DEBUG = true
 for _, file in ipairs(files) do
     Package:Require(file)
 end
+
+function SetSharedValue(value)
+
+end
