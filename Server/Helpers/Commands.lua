@@ -105,6 +105,10 @@ RegisterServerCommand("settraitor", function(player, args)
     player:SetRole(ROLES.TRAITOR)
 end)
 
+RegisterServerCommand("setdetective", function(player, args)
+    player:SetRole(ROLES.DETECTIVE)
+end)
+
 RegisterServerCommand("spawngun", function(player, args)
     -- Spawning the AK47
     local my_ak47 = NanosWorldWeapons.AK47(player:GetControlledCharacter():GetLocation(), Rotator())
@@ -120,4 +124,6 @@ RegisterServerCommand("spawngun", function(player, args)
     -- Sets the ADS transform offset to fit the RedDot center position,
     -- each weapon will need a different offset to fit it's sight. AK47 + RedDot best fit is Z = -15.9
     my_ak47:SetSightTransform(Vector(0, 0, -15.9), Rotator(0, 0, 0))
+
+    player:SendPlayerMessage("You spawned a ak47 with scope")
 end)

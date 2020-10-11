@@ -3,7 +3,6 @@ local IsLeanback = false
 TraitorShop = WebUI("TraitorShop", "file:///UI/Shop/esx_shops/html/index.html", false)
 TraitorShopVisible = false
 
-isAiming = false
 
 Client:on("KeyUp", function(KeyName, _, _)
 
@@ -32,18 +31,4 @@ Client:on("KeyDown", function(KeyName,_,_)
    --if KeyName == "H" then
    -- Events:Call("showWeaponInfo", {true})
    -- end
-end)
-
-Client:on("MouseDown", function(KeyName, MouseX, MouseY)
-    if (KeyName == "RightMouseButton") then
-        Package:Log("Right Click pressed at X: " .. MouseX .. ", Y: " .. MouseY)
-        isAiming = true
-    end
-end)
-
-Client:on("MouseUp", function(KeyName, MouseX, MouseY)
-    if (KeyName == "RightMouseButton") then
-        Package:Log("Right Click up at X: " .. MouseX .. ", Y: " .. MouseY)
-        isAiming = false
-    end
 end)
