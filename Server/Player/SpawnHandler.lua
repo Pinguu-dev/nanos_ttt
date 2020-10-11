@@ -7,12 +7,9 @@ spawn_locations = {
 
 -- Meshes
 character_meshes = {
-	"NanosWorld::SK_Male",
-    "NanosWorld::SK_Female",
     "NanosWorld::SK_PostApocalyptic",
     "NanosWorld::SK_ClassicMale",
 }
-
 -- Spawn System
 NanosPlayer:on("Spawn", function(player)
 	Server:BroadcastChatMessage("<blue>".. player:GetName() .."</> now wait for the start of the game!")
