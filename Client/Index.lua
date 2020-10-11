@@ -2,17 +2,13 @@ Package:Require("KeyHandler.lua")
 Package:Require("HUDs/TTT_Overlay.lua")
 Package:Require("HUDs/MainHud.lua")
 Package:Require("Traitor/TraitorShop.lua")
-Package:Require("Test.lua")
+Package:Require("HUDs/Nametag.lua")
 
 World:SpawnDefaultSun()
 
 -- Sets the same time for everyone
 local gmt_time = os.date("!*t", os.time())
 World:SetTime(12, 0)
-
-Client:on("Chat", function(text)
-	Events:CallRemote("TriggerCommandHandler", { text })
-end)
 
 Events:on("SendNoti", function(text, art)
 	MainHUD:CallEvent("SendNotification", { text, art })

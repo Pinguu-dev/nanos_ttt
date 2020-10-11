@@ -1,16 +1,13 @@
 local commands = {}
 
-Events:on("TriggerCommandHandler", function(player, text)
+Server:on("Chat", function(player, text)
     local args = splitString(string.sub(text, 2))
     local command = args[1]
 
     if commands[command] then
         commands[command](player, args)
+        return false
     end
-end)
-
-Server:on("Chat", function(player, text)
-    -- Does not work with commands
 end)
 
 function splitString(string)
