@@ -27,7 +27,6 @@ Events:on("PlaySound", function(soundFile)
 end)
 
 Player:on("VOIP", function(player, IsTalking)
-	Package:Log("Call")
 	MainHUD:CallEvent("VoiceIcon", { IsTalking })
 end)
 
@@ -36,7 +35,6 @@ function AddOwnerCharacter(player)
     if(character == nil) then return end
 
     character:SetValue("characterOwner", player)
-    Package:Log("SET DATA OWNER ID ".. character:GetID())
 end
 
 
