@@ -2,7 +2,7 @@ local NametagUI = WebUI("Nametag", "file:///UI/Nametag/index.html", false)
 
 local showNametag = false
 
-Timer:SetTimeout(100, function()
+Timer:SetTimeout(150, function()
     local newViewPort = Vector2D(Render:GetViewportSize().X / 2, Render:GetViewportSize().Y / 2)    
     local viewport = Render:Deproject(newViewPort)
 
@@ -25,6 +25,10 @@ Timer:SetTimeout(100, function()
 
                 NametagUI:CallEvent("SetName", { owner:GetName(), "#fff" })
                 NametagUI:CallEvent("SetHealthString", { actor:GetHealth() })
+
+                actor:on("TakeDamage", function(damage, type, bone, from_direction, instigator)
+                    NametagUI:CallEvent("SetHealthString", { actor:GetHealth() })
+                end)
 
                 showNametag = true
             end
