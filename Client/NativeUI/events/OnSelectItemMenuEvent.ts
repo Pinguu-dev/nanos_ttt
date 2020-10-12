@@ -1,2 +1,0 @@
-interface OnSelectItemMenuEvent extends EventMenuItem {
-}

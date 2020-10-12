@@ -1,3 +1,0 @@
-class TextMenuItem extends MenuItem {
-
-}

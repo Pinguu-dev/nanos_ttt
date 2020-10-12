@@ -1,2 +1,0 @@
-interface OnClickItemMenuEvent extends EventMenuItem {
-}
