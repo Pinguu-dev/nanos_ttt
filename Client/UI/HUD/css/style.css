@@ -1,7 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
 * {padding: 0; margin: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif;}
 
-#ui {
+body {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+#ttt_nametag {
+	position: absolute;
+	width: 300px;
+	height: 50px;
+	top: 70%;
+	left: 50%;
+	margin-left: -150px; /* margin is -0.5 * dimension */
+	margin-top: -25px; 
+	text-align: center;
+	box-sizing: border-box;
+	font-family: 'Tahoma';
+	font-size: 13px;
+	text-shadow: 1px 1px #000;
+	color: #fff;
+	font-weight: bold;
+	display: none;
+}
+
+#ttt_nametag .name {
+	margin-bottom: -12px;
+}
+
+#ttt_nametag .health {
+	color: rgba(0, 255, 0, 255);
+}
+
+#ttt_nametag .info {
+	display: none;
+	margin-top: -12px;
+}
+
+#ttt_info {
 	position: absolute;
 	bottom: 10px;
 	left: 10px;
@@ -11,7 +47,7 @@
 	border-radius:10px;
 }
 
-#ui > .fraction {
+#ttt_info > .fraction {
 	background-color: #474444;
 	padding: 3px;
 	color: #fff;
@@ -23,7 +59,7 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-#ui > .round_time {
+#ttt_info > .round_time {
 	float: right;
 	color: #fff;
 	font-weight: bold;
@@ -32,27 +68,27 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-#ui > #progress_hp {
-    background: #333;
-    border-radius: 13px;
-    height: 22px;
-    width: 95%;
-    padding: 2px;
+#ttt_info > #progress_hp {
+	background: #333;
+	border-radius: 13px;
+	height: 22px;
+	width: 95%;
+	padding: 2px;
 	margin-top: 7px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#ui > #progress_hp > .progressbar_health {
+#ttt_info > #progress_hp > .progressbar_health {
 
-    display: block;
-    background: #da2b2b;
-    width: 100%;
-    height: 100%;
-    border-radius: 9px;
+	display: block;
+	background: #da2b2b;
+	width: 100%;
+	height: 100%;
+	border-radius: 9px;
 }
 
-#ui > #progress_hp > .progressbar_health > .inner_hp_progress {
+#ttt_info > #progress_hp > .progressbar_health > .inner_hp_progress {
 	position: absolute;
 	right: 15px;
 	color: #fff;
@@ -62,27 +98,27 @@
 	text-shadow: 1px 1px 2px #000;
 }
 
-#ui > #progress_karma {
-    background: #333;
-    border-radius: 13px;
-    height: 22px;
-    width: 95%;
-    padding: 2px;
+#ttt_info > #progress_karma {
+	background: #333;
+	border-radius: 13px;
+	height: 22px;
+	width: 95%;
+	padding: 2px;
 	margin-top: 32px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#ui > #progress_karma > .progressbar_karma {
+#ttt_info > #progress_karma > .progressbar_karma {
 
-    display: block;
-    background: #da2b82;
-    width: 0%;
-    height: 100%;
-    border-radius: 9px;
+	display: block;
+	background: #da2b82;
+	width: 0%;
+	height: 100%;
+	border-radius: 9px;
 }
 
-#ui > #progress_karma > .progressbar_karma > .inner_karma_progress {
+#ttt_info > #progress_karma > .progressbar_karma > .inner_karma_progress {
 	position: absolute;
 	right: 15px;
 	top: 35px;
@@ -140,4 +176,24 @@
 	100% {
 		transform: scale(0.95);
 	}
+}
+
+.overlay {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+#inno_won_overlay {
+	background: url("../images/inno_won.png") no-repeat center;
+	display: none;
+}
+
+#terror_won_overlay {
+	background: url("../images/terror_won.png") no-repeat center;
+	display: none;
+}
+
+#start_overlay {
+	background: url("../images/ttt_start.png") no-repeat center;
 }

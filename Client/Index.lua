@@ -1,5 +1,4 @@
 Package:Require("KeyHandler.lua")
-Package:Require("HUDs/TTT_Overlay.lua")
 Package:Require("HUDs/MainHud.lua")
 Package:Require("Traitor/TraitorShop.lua")
 Package:Require("HUDs/Nametag.lua")
@@ -28,7 +27,9 @@ Events:on("PlaySound", function(soundFile)
 end)
 
 Player:on("VOIP", function(player, IsTalking)
-	MainHUD:CallEvent("VoiceIcon", { IsTalking })
+	if (player == NanosWorld:GetLocalPlayer()) then
+		MainHUD:CallEvent("VoiceIcon", { IsTalking })
+	end
 end)
 
 function AddOwnerCharacter(player)

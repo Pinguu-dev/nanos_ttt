@@ -1,44 +1,24 @@
 <html>
 
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		
-		<script src="jquery-3.5.1.min.js"></script>		
-		<script src="notify.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 
-		<script>$.notify.addStyle('grey', {
-			html: "<div><span data-notify-text/></div>",
-			classes: {
-			  base: {
-				"white-space": "nowrap",
-				"background-color": "rgba(0,0,0,0.5)",
-				"color": "#fff",
-				"padding-top": "5px",
-				"padding-bottom": "5px",
-				"padding-left": "10px",
-				"padding-right": "10px",
-				"border-radius": "10px"
-			  },
-			  superblue: {
-				"color": "white",
-				"background-color": "blue"
-			  }
-			}
-		  });		  
-		  </script>
-
-		<script src="index.js"></script>
-
-	
+		<script src="js/jquery-3.5.1.min.js"></script>		
+		<script src="js/notify.min.js"></script>
+		<script src="js/index.js"></script>
 	</head>
 	
 	<body>
-		<div id="ui">
+		<div id="inno_won_overlay" class="overlay"></div>
+		<div id="terror_won_overlay" class="overlay"></div>
+		<div id="start_overlay" class="overlay"></div>
+
+		<div id="ttt_info">
 			<div class="fraction">
-				Preparing
+				Warm up
 			</div>
 			<div class="round_time">
-				99:99
+				
 			</div>
 			
 			<div id="progress_karma">
@@ -50,10 +30,16 @@
 			</div>
 
 			<div id="voice_icon">
-				<img src="voice.png" height="32px" width="32px"/>
+				<img src="images/voice.png" height="32px" width="32px"/>
 			</div>
 		</div>
-		
+
+		<div id="ttt_nametag">
+			<div class="name">Dinkelberg</div><br />
+			<div class="health">Healthy</div><br />
+			<div class="info">Press E to search. ALT + E to search covertly.</div>
+		</div>
+
 		<div id="weapon_ammo_container">
 			<span id="weapon_ammo_clip">30</span> <!-- Ammo Clip value -->
 			<span id="weapon_ammo_bag">/ 1000</span> <!-- Ammo Bag value -->

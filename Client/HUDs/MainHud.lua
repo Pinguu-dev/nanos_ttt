@@ -96,3 +96,15 @@ end
 function UpdateHealth(health)
 	MainHUD:CallEvent("UpdateHealth", {health})
 end
+
+Events:on("TTT_UpdateMouseStatus", function(status)
+	Client:SetMouseEnabled(status)
+end)
+
+Events:on("TTT_TerrorWonScreen", function(status)
+	MainHUD:CallEvent("TTT_TerrorWonScreen", { status })
+end)
+
+Events:on("TTT_InnoWonScreen", function(status)
+	MainHUD:CallEvent("TTT_InnoWonScreen", { status })
+end)
