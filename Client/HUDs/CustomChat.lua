@@ -27,6 +27,19 @@ ChatUI:on("ChatMessage", function(text)
 end)
 
 ChatUI:on("ChangeChatState", function(state)
+	local char = NanosWorld:GetLocalPlayer():GetControlledCharacter()
+
+	if(state == true) then		
+		if(char ~= nil) then 
+			char:SetMovementEnabled(false)
+		end
+	else
+		if(char ~= nil) then 
+			char:SetMovementEnabled(true)
+		end
+	end
+
+
 	Chat.inputOpened = state
 end)
 
