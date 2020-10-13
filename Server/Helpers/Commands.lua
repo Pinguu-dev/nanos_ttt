@@ -127,3 +127,9 @@ RegisterServerCommand("spawngun", function(player, args)
 
     player:SendPlayerMessage("You spawned a ak47 with scope")
 end)
+
+RegisterServerCommand("radar", function(player, args)
+    Events:CallRemote("ShowRadar", player, {})
+
+    player:SendPlayerMessage("Show radar")
+end)
