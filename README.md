@@ -27,6 +27,7 @@ New functions for player
 ```LUA
 Player:SetGodmode(Player self, boolean state)
 Player:SendNotification(Player self, string message, string type) -- type is optional
+Player:SendPlayerMessage(Player self, string message) -- Sends a message in the custom chat
 Player:SetRole(Player self, integer bool) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
 Player:GetRole(Player self)
 Player:SetAlive(Player self, boolean state) -- Setting up only a variable for TTT
