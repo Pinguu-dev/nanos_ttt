@@ -43,6 +43,7 @@ Server:GetAliveTraitors()
 Server:GetAliveInnocents()
 Server:GiveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
 Server:RemoveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+CustomChat:SendMessage(string message)
 ```
 New TTT functions
 ```LUA
