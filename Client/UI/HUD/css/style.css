@@ -10,7 +10,7 @@ body {
 	position: absolute;
 	width: 300px;
 	height: 50px;
-	top: 70%;
+	top: 55%;
 	left: 50%;
 	margin-left: -150px; /* margin is -0.5 * dimension */
 	margin-top: -25px; 
@@ -196,4 +196,5 @@ body {
 
 #start_overlay {
 	background: url("../images/ttt_start.png") no-repeat center;
+	background-size: 60%;
 }

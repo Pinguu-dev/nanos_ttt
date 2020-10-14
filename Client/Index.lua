@@ -3,6 +3,7 @@ Package:Require("HUDs/MainHud.lua")
 Package:Require("Traitor/TraitorShop.lua")
 Package:Require("HUDs/Nametag.lua")
 Package:Require("HUDs/CustomChat.lua")
+Package:Require("HUDs/TraitorRadar.lua")
 
 World:SpawnDefaultSun()
 
