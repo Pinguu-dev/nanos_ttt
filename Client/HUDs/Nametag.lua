@@ -1,7 +1,7 @@
 
 local showNametag = false
 
-Timer:SetTimeout(200, function()
+Timer:SetTimeout(130, function()
 	local newViewPort = Vector2D(Render:GetViewportSize().X / 2, Render:GetViewportSize().Y / 2)	
 	local viewport = Render:Deproject(newViewPort)
 

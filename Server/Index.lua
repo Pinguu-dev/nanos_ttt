@@ -124,6 +124,7 @@ function TTT:StopRound()
 
 		player:SetVOIPMuted(false) -- Spieler darf wieder sprechen
 		player:SetAlive(true) -- Spieler ist wieder am Leben
+		player:SetUnspectating() -- Spieler wird wieder zurückgesetzt
 	
 		-- Charakter für die Toten erstellen
 		local char = nil		
