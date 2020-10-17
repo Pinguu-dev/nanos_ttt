@@ -27,6 +27,14 @@ Events:on("PlaySound", function(soundFile)
 	)
 end)
 
+Events:on("SetPlayerSpectating", function(player)
+	Client:Spectate(player)
+end)
+
+Events:on("SetPlayerUnspectating", function()
+	Client:Unspectate()
+end)
+
 Player:on("VOIP", function(player, IsTalking)
 	if (player == NanosWorld:GetLocalPlayer()) then
 		MainHUD:CallEvent("VoiceIcon", { IsTalking })

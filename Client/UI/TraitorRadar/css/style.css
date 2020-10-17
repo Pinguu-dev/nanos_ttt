@@ -1,8 +1,18 @@
-#name {
-    position: absolute;
+* {
     color: #fff;
     font-family: 'Tahoma';
     text-shadow: 1px 1px #000;
+    font-weight: bold;
+    font-size: 16px;
+}
 
-    top: -50px;
+.radar {
+    position: absolute;
+    height: 165px;
+    width: 165px;
+    transform: scale(0.4);
+}
+
+.radar > .text {
+    text-align: center;
 }

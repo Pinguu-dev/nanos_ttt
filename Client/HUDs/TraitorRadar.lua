@@ -2,42 +2,53 @@ Radar = {
 	UI = WebUI("Radar", "file:///UI/TraitorRadar/index.html", false),
 	Enabled = false,
 	currentX = 0,
-	currentY = 0
+	currentY = 0,
+	radarLocations = { }
 }
 
 Events:on("ShowRadar", function()
-	Radar.UI:SetVisible(true)
-	Radar.Enabled = true
-
+	SetRadarVisible(true)
 end)
 
+function SetRadarVisible(state)
+	Radar.UI:SetVisible(state)
+	Radar.Enabled = state
 
-Client:on("Tick", function() 
+	UpdatePlayerLocations()
+end
+
+Timer:SetTimeout(10000, function()
 	if(Radar.Enabled == false) then return end
 
-	local newViewPort = Vector2D(Render:GetViewportSize().X / 2, Render:GetViewportSize().Y / 2)	
-	local viewport = Render:Deproject(newViewPort)
+	UpdatePlayerLocations()
+end)
+
+function UpdatePlayerLocations()
+	Radar.radarLocations = { }
+
+	Radar.UI:CallEvent("RemoveAllRadarPoints", {})
 
 	for i,player in pairs(Player) do
-		
 		if(player ~= NanosWorld:GetLocalPlayer()) then
-
-
-
 			local char = player:GetControlledCharacter()
 			if(char ~= nil) then
+			
+				table.insert(Radar.radarLocations, { ["ID"] = player:GetID(), ["Vector"] = char:GetLocation() })
 
-
-
-				local location = char:GetLocation()
-				local screenLocation = Render:Project(location)
-
-				if(screenLocation.X > 0) then
-					Radar.UI:CallEvent("setPosition", { screenLocation.X, screenLocation.Y })
-				end
-				
+				Radar.UI:CallEvent("AddRadarPoint", { player:GetID() })
+				Package:Log("Add Location for ".. player:GetName())
 			end
 		end
+	end
+end
+
+
+Timer:SetTimeout(50, function() 
+	if(Radar.Enabled == false) then return end
+
+	for i,location in pairs(Radar.radarLocations) do	
+		local screenLocation = Render:Project(location.Vector)
+		Radar.UI:CallEvent("UpdateRadarPosition", { location.ID, screenLocation.X - 80, screenLocation.Y - 80 })
 	end
 
 end)
