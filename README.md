@@ -6,6 +6,8 @@ If you want to help, you can push a pull request. <3
 Thanks SyedMuhammad for the help! <3
 Thanks MegaThorx for help with the read-only problem and provide for the classlib
 
+#info project is currently outdated i think. I need to update it in future :)
+
 -- Script Infos --
 ```LUA
 ROLES = {
