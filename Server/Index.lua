@@ -1,4 +1,5 @@
 Package:RequirePackage("NanosWorldWeapons")
+--Package:RequirePackage("NanosWorldVehicles")
 
 -- Settings
 ROLES = {
@@ -47,29 +48,29 @@ Package:Require("Player/DamageHandler.lua")
 SpawnWeaponsInWorld()
 
 -- Charakter wird gelöscht, wenn der Charakter vom Spieler getrennt wird und er Disconnected ist
-NanosPlayer:on("UnPossess", function(player, character, is_player_disconnecting)
+NanosPlayer:Subscribe("UnPossess", function(player, character, is_player_disconnecting)
 	if (is_player_disconnecting) then
 		character:Destroy()
 	end
 end)
 
 -- Wenn ein Spieler nicht mehr auf dem Server ist
-NanosPlayer:on("Destroy", function(player)
-	Server:BroadcastChatMessage("<red>".. player:GetName() .."</> has left the server!")
+NanosPlayer:Subscribe("Destroy", function(player)
+	NanosServer:BroadcastChatMessage("<red>".. player:GetName() .."</> has left the server!")
 
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 		
 		-- Wenn Terrorist das Match verlässt
 		if(player:GetRole() == ROLES.TRAITOR) then
 			TTT:StopRound()
-			Server:SendNotification("The round aborted because the traitor left the game", "error")
+			NanosServer:SendNotification("The round aborted because the traitor left the game", "error")
 			return
 		end
 
 		-- Runde wird beendet wenn weniger wie zwei Spieler noch dabei sind
-		if(Server:GetAlivePlayers() < 2) then
+		if(NanosServer:GetAlivePlayers() < 2) then
 			TTT:StopRound()
-			Server:SendNotification("The round was cancelled because there are not enough players left", "error")
+			NanosServer:SendNotification("The round was cancelled because there are not enough players left", "error")
 		end
 
 	end
@@ -97,7 +98,7 @@ end
 function TTT:StopRound()
 	if(TTT.match_state ~= MATCH_STATES.IN_PROGRESS) then return end
 
-	Server:SendNotification("The round is started manually, wait for the round begin.")
+	NanosServer:SendNotification("The round is started manually, wait for the round begin.")
 
 	-- HUD wird angepasst
 	Events:BroadcastRemote("UpdatePlayerFraction", { -1 }) -- Rolle wird auf "MATCH OVER" geändert
@@ -124,6 +125,7 @@ function TTT:StopRound()
 
 		player:SetVOIPMuted(false) -- Spieler darf wieder sprechen
 		player:SetAlive(true) -- Spieler ist wieder am Leben
+		player:SetUnspectating() -- Spieler wird wieder zurückgesetzt
 	
 		-- Charakter für die Toten erstellen
 		local char = nil		

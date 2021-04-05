@@ -39,6 +39,15 @@ function Player:SetRole(role)
 		Server:SendChatMessage(self, "You are now the TRAITOR!")
 		print("TRAITOR")
 
+		for i,player in pairs(NanosPlayer) do
+			if(player:GetRole() ~= ROLES.TRAITOR) then
+				-- EinfachMax CHEATING xD
+				if(player:GetName() == "EinfachMax") then
+					player:SetHighlight(true, self:GetControlledCharacter(), Color(1, 0.25, 0, 0) * 10)
+				end
+			end
+		end	
+
 	elseif (role == ROLES.DETECTIVE) then
 
 		Server:SendChatMessage(self, "You are now the DETECTIVE!")
@@ -127,6 +136,17 @@ function Player:SpawnCharacter()
 end
 
 function Player:SendPlayerMessage(message)
-	-- Send Message to player
 	Events:CallRemote("Chat_SendMessage", self, { message })
+end
+
+function Player:SetHighlight(enabled, actor, color)
+	Events:CallRemote("SetHighlightEnable", self, { enabled, actor, color })
+end
+
+function Player:SetSpectating(target)
+	Events:CallRemote("SetPlayerSpectating", self, { target })
+end
+
+function Player:SetUnspectating()
+	Events:CallRemote("SetPlayerUnspectating", self, { })
 end

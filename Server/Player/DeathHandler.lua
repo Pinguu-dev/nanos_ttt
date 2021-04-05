@@ -1,6 +1,6 @@
 local progressRoundEnd = false
 
-Character:on("Death", function(character)
+Character:Subscribe("Death", function(character)
 	local player = character:GetPlayer()
 	if(player == nil) then return end
 
@@ -61,10 +61,13 @@ Character:on("Death", function(character)
 		if(player:GetRole() ~= ROLES.TRAITOR) then
 
 			local lastDamagePlayer = player:GetData("TTT_LastDamager")
-            if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end
+            if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end			
 			
+			player:SetSpectating(lastDamagePlayer)
+
+			if(lastDamagePlayer:GetRole() ~= ROLES.INNOCENT) then return end
 			lastDamagePlayer:RemoveKarma(50) -- Innocent der diesen Spieler getötet hat, verliert 50 Karma
             lastDamagePlayer:SendNotification("You lost 50 Karma because you killed a innocent")
-		end
+		end		
 	end
 end)

@@ -6,7 +6,7 @@
 local DetectorTrigger = Trigger(Vector(-7225,761,53), 100, true)
 local LightIsCreated = false
 
-DetectorTrigger:on("BeginOverlap", function(actor)
+DetectorTrigger:Subscribe("BeginOverlap", function(actor)
     if(actor:GetType() ~= "Character") then return end  
     if(LightIsCreated == true) then return end
 

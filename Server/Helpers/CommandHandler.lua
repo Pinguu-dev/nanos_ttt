@@ -1,6 +1,6 @@
 local commands = {}
 
-Events:on("Chat_SV_CommandExecute", function(player, command)
+Events:Subscribe("Chat_SV_CommandExecute", function(player, command)
     print("command: ".. command)
     local args = splitString(string.sub(command, 1))
 

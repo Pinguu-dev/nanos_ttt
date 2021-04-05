@@ -1,6 +1,6 @@
 local TraitorTrigger = Trigger(Vector(-2700.62, -2365.31, 87.00), 250, true)
 
-TraitorTrigger:on("BeginOverlap", function(actor)
+TraitorTrigger:Subscribe("BeginOverlap", function(actor)
     if(actor:GetType() ~= "Character") then return end
     local character = actor
     local player = character:GetPlayer()
@@ -13,7 +13,7 @@ TraitorTrigger:on("BeginOverlap", function(actor)
     end
 end)
 
-TraitorTrigger:on("EndOverlap", function(actor)
+TraitorTrigger:Subscribe("EndOverlap", function(actor)
     if(actor:GetType() ~= "Character") then return end 
 
     local character = actor
@@ -30,7 +30,7 @@ TraitorTrigger:on("EndOverlap", function(actor)
     end
 end)
 
-Events:on("TraitorShop", function(player)
+Events:Subscribe("TraitorShop", function(player)
     if(player:GetRole() ~= ROLES.TRAITOR) then return end
     if(player:GetData("playerTraitorShop") == nil or player:GetData("playerTraitorShop") == false) then 
         return 

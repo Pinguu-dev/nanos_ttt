@@ -1,11 +1,10 @@
 vehicle_names = {
-	"NanosWorld::BP_Vehicle_SUV",
-	"NanosWorld::BP_Vehicle_Truck",
-	"NanosWorld::BP_Vehicle_Pickup",
-	"NanosWorld::BP_Vehicle_Truck",
-	"NanosWorld::BP_Vehicle_Truck_Chassis",
-	"NanosWorld::BP_Vehicle_Hatchback",
-	"NanosWorld::BP_Vehicle_SportCar",
+	"SUV",
+	"Hatchback",
+	"Pickup",
+	"SportsCar",
+	"TruckBox",
+	"TruckChassis",
 }
 
 ServerWeapons = {}
@@ -24,6 +23,17 @@ function SpawnRandomWeapon(loc, rot)
 	if(r == 8) then NanosWorldWeapons.AP5(loc, rot) end
 	if(r == 9) then NanosWorldWeapons.SMG11(loc, rot) end
 
+end
+
+function SpawnRandomVehicle(loc, rot, vehicle)
+	local r = math.random(1,9)
+	
+	if(r == 1) then NanosWorldVehicles.SUV(loc, rot) end
+	if(r == 2) then NanosWorldVehicles.Hatchback(loc, rot) end
+	if(r == 3) then NanosWorldVehicles.Pickup(loc, rot) end
+	if(r == 4) then NanosWorldVehicles.SportsCar(loc, rot) end
+	if(r == 5) then NanosWorldVehicles.TruckBox(loc, rot) end
+	if(r == 6) then NanosWorldVehicles.TruckChassis(loc, rot) end
 end
 
 props = {
@@ -156,23 +166,23 @@ props = {
 
 function SpawnVehiclesInWorld()
 	vehicles = {
-		Vehicle(Vector(-4680.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-4350.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-3350.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-3990.000, 3240.000, 1.000), Rotator(0.000000, -89.999489, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-6330.000, 3240.000, 1.000), Rotator(0.000000, -89.999489, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-4780.000, 60.000, 21.000), Rotator(0.000000, 0.000641, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-13470.000, 60.000, 21.000), Rotator(0.000000, 0.000641, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(4490.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(4820.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(7820.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(3530.000, -6940.000, -9.000), Rotator(0.000000, 0.000000, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-2790.000, 13480.000, -9.000), Rotator(0.000000, 0.000000, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-2670.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-3000.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-3350.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-5000.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
-		Vehicle(Vector(-14070.000, 12640.000, -9.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-4680.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-4350.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-3350.000, 2270.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-3990.000, 3240.000, 1.000), Rotator(0.000000, -89.999489, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-6330.000, 3240.000, 1.000), Rotator(0.000000, -89.999489, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-4780.000, 60.000, 21.000), Rotator(0.000000, 0.000641, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-13470.000, 60.000, 21.000), Rotator(0.000000, 0.000641, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(4490.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(4820.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(7820.000, -14750.000, 1.000), Rotator(0.000000, 90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(3530.000, -6940.000, -9.000), Rotator(0.000000, 0.000000, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-2790.000, 13480.000, -9.000), Rotator(0.000000, 0.000000, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-2670.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-3000.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-3350.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-5000.000, 14760.000, 1.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
+		SpawnRandomVehicle(Vector(-14070.000, 12640.000, -9.000), Rotator(0.000000, -90.000114, 0.000000), vehicle_names[math.random(#vehicle_names)]),
 	
 	}
 

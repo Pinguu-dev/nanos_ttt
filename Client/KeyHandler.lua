@@ -4,9 +4,11 @@ TraitorShop = WebUI("TraitorShop", "file:///UI/Shop/esx_shops/html/index.html", 
 TraitorShopVisible = false
 
 
-Client:on("KeyUp", function(KeyName, _, _)
+Client:Subscribe("KeyUp", function(KeyName, _, _)
 
     if (KeyName == "L") then
+	
+		Client:CallLevelBlueprintEvent("CustomEvent")
 
       if(IsLeanback == false) then
         -- Spieler hintzen
@@ -27,7 +29,7 @@ Client:on("KeyUp", function(KeyName, _, _)
 
 end)
 
-Client:on("KeyDown", function(KeyName,_,_)
+Client:Subscribe("KeyDown", function(KeyName,_,_)
    --if KeyName == "H" then
    -- Events:Call("showWeaponInfo", {true})
    -- end

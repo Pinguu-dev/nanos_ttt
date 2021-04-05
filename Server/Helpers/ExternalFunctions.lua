@@ -1,3 +1,9 @@
+--
+NanosServer = Server
+Server = inherit(DataObject)
+registerElementClass("Server", Server)
+--
+
 function table.Count( t )
     local i = 0
     for k in pairs( t ) do i = i + 1 end

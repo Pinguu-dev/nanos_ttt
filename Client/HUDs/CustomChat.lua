@@ -5,28 +5,28 @@ Chat = {
 	inputOpened = false
 }
 
-Package:on("Load", function()
+Package:Subscribe("Load", function()
 	Client:SetChatVisibility(false)
 end)
 
-NanosWorld:on("SpawnLocalPlayer", function(local_player)
+NanosWorld:Subscribe("SpawnLocalPlayer", function(local_player)
 	Client:SetChatVisibility(false)
 end)
 
-Events:on("Chat_SendMessage", function(message) 
+Events:Subscribe("Chat_SendMessage", function(message) 
 	ChatUI:CallEvent("PushChat", { message })
 end)
 
-ChatUI:on("CommandExecute", function(command)
+ChatUI:Subscribe("CommandExecute", function(command)
 	Events:CallRemote("Chat_SV_CommandExecute", { command })
 end)
 
-ChatUI:on("ChatMessage", function(text)
+ChatUI:Subscribe("ChatMessage", function(text)
 	Events:CallRemote("Chat_SV_CheckMessage", { text })
 	Chat.inputOpened = false
 end)
 
-ChatUI:on("ChangeChatState", function(state)
+ChatUI:Subscribe("ChangeChatState", function(state)
 	local char = NanosWorld:GetLocalPlayer():GetControlledCharacter()
 
 	if(state == true) then		
@@ -43,7 +43,7 @@ ChatUI:on("ChangeChatState", function(state)
 	Chat.inputOpened = state
 end)
 
-Client:on("KeyUp", function(KeyName, _, _)
+Client:Subscribe("KeyUp", function(KeyName, _, _)
 	if(KeyName == "T" and Chat.active == true and Chat.inputOpened == false) then
 		ChatUI:CallEvent("CallEnableChatInput", {})
 		Chat.inputOpened = true

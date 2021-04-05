@@ -5,7 +5,7 @@ function CustomChat:SendMessage(message)
 	Events:BroadcastRemote("Chat_SendMessage", { message })
 end
 
-Events:on("Chat_SV_CheckMessage", function(player, message)
+Events:Subscribe("Chat_SV_CheckMessage", function(player, message)
 	local new_message = "<b>".. player:GetName() .."</b>: ".. message
 
 	if(player:GetRole() == ROLES.DETECTIVE) then

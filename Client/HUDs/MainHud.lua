@@ -1,34 +1,34 @@
 -- Spawns a WebUI with the HTML file you just created
 MainHUD = WebUI("Main HUD", "file:///UI/HUD/index.html", true)
 
-Events:on("UpdatePlayerFraction", function(fraction)
+Events:Subscribe("UpdatePlayerFraction", function(fraction)
 	MainHUD:CallEvent("UpdateFraction", { fraction })
 	-- 0 = Preparing - 1 = Innocent - 2 = Traitor - 3 = Round Over
 end)
 
-Events:on("UpdatePlayerKarma", function(karma)
+Events:Subscribe("UpdatePlayerKarma", function(karma)
 	MainHUD:CallEvent("UpdateKarma", { karma })
 end)
 
-Events:on("UpdateRoundTimer", function(time)
+Events:Subscribe("UpdateRoundTimer", function(time)
 	MainHUD:CallEvent("UpdateRoundTimer", { time })
 end)
 
--- When LocalPlayer spawns, sets an event on it to trigger when we possesses a new character, to store the local controlled character locally. This event is only called once, see Package:on("Load") to load it when reloading a package
-NanosWorld:on("SpawnLocalPlayer", function(local_player)
-	local_player:on("Possess", function(character)
+-- When LocalPlayer spawns, sets an event on it to trigger when we possesses a new character, to store the local controlled character locally. This event is only called once, see Package:Subscribe("Load") to load it when reloading a package
+NanosWorld:Subscribe("SpawnLocalPlayer", function(local_player)
+	local_player:Subscribe("Possess", function(character)
 		UpdateLocalCharacter(character)
 	end)
 end)
 
 -- When package loads, verify if LocalPlayer already exists (eg. when reloading the package), then try to get and store it's controlled character
-Package:on("Load", function()
+Package:Subscribe("Load", function()
 	if (NanosWorld:GetLocalPlayer() ~= nil) then
 		UpdateLocalCharacter(NanosWorld:GetLocalPlayer():GetControlledCharacter())
 	end
 end)
 
-Events:on("ResetHeal", function(heal)
+Events:Subscribe("ResetHeal", function(heal)
 	Timer:SetTimeout(5000, function()
 		local character = NanosWorld:GetLocalPlayer():GetControlledCharacter()
 		if(character ~= nil) then 
@@ -47,12 +47,12 @@ function UpdateLocalCharacter(character)
 	UpdateHealth(character:GetHealth())
 
 	-- Sets on character an event to update the health's UI after it takes damage
-	character:on("TakeDamage", function(damage, type, bone, from_direction, instigator)
+	character:Subscribe("TakeDamage", function(damage, type, bone, from_direction, instigator)
 		UpdateHealth(character:GetHealth())
 	end)
 
 	-- Sets on character an event to update the health's UI after it dies
-	character:on("Death", function()
+	character:Subscribe("Death", function()
 		UpdateHealth(0)
 	end)
 
@@ -65,24 +65,24 @@ function UpdateLocalCharacter(character)
 	end
 
 	-- Sets on character an event to update his grabbing weapon (to show ammo on UI)
-	character:on("PickUp", function(object)
+	character:Subscribe("PickUp", function(object)
 		if (object:GetType() == "Weapon") then
 			UpdateAmmo(true, object:GetAmmoClip(), object:GetAmmoBag())
 		end
 	end)
 
 	-- Sets on character an event to remove the ammo ui when he drops it's weapon
-	character:on("Drop", function(object)
+	character:Subscribe("Drop", function(object)
 		UpdateAmmo(false)
 	end)
 
 	-- Sets on character an event to update the UI when he fires
-	character:on("Fire", function(weapon)
+	character:Subscribe("Fire", function(weapon)
 		UpdateAmmo(true, weapon:GetAmmoClip(), weapon:GetAmmoBag())
 	end)
 
 	-- Sets on character an event to update the UI when he reloads the weapon
-	character:on("Reload", function(weapon, ammo_to_reload)
+	character:Subscribe("Reload", function(weapon, ammo_to_reload)
 		UpdateAmmo(true, weapon:GetAmmoClip(), weapon:GetAmmoBag())
 	end)
 end
@@ -97,14 +97,14 @@ function UpdateHealth(health)
 	MainHUD:CallEvent("UpdateHealth", {health})
 end
 
-Events:on("TTT_UpdateMouseStatus", function(status)
+Events:Subscribe("TTT_UpdateMouseStatus", function(status)
 	Client:SetMouseEnabled(status)
 end)
 
-Events:on("TTT_TerrorWonScreen", function(status)
+Events:Subscribe("TTT_TerrorWonScreen", function(status)
 	MainHUD:CallEvent("TTT_TerrorWonScreen", { status })
 end)
 
-Events:on("TTT_InnoWonScreen", function(status)
+Events:Subscribe("TTT_InnoWonScreen", function(status)
 	MainHUD:CallEvent("TTT_InnoWonScreen", { status })
 end)

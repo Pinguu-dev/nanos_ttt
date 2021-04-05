@@ -3,31 +3,41 @@ Package:Require("HUDs/MainHud.lua")
 Package:Require("Traitor/TraitorShop.lua")
 Package:Require("HUDs/Nametag.lua")
 Package:Require("HUDs/CustomChat.lua")
-Package:Require("HUDs/TraitorRadar.lua")
+--Package:Require("HUDs/TraitorRadar.lua")
 
 World:SpawnDefaultSun()
 
--- Sets the same time for everyone
 local gmt_time = os.date("!*t", os.time())
 World:SetTime(12, 0)
 
-Events:on("SendNoti", function(text, art)
+Events:Subscribe("SendNoti", function(text, art)
 	MainHUD:CallEvent("SendNotification", { text, art })
 end)
 
-Events:on("PlaySound", function(soundFile)
-	local sound = Sound(
-		Vector(), -- Location (if a 3D sound)
-		soundFile, -- Asset Path
-		true, -- Is 2D Sound
-		true, -- Auto Destroy (if to destroy after finished playing)
-		1, -- Sound Type (SFX)
-		1, -- Volume
-		1 -- Pitch
-	)
+Events:Subscribe("PlaySound", function(soundFile)
+	local sound = Sound(Vector(), soundFile, true, true, 1,	1, 1)
 end)
 
-Player:on("VOIP", function(player, IsTalking)
+Events:Subscribe("SetPlayerSpectating", function(player)
+	Client:Spectate(player)
+end)
+
+Events:Subscribe("SetPlayerUnspectating", function()
+	Client:Unspectate()
+end)
+
+Events:Subscribe("SetDiscordActivity", function(state, details, largeimage, largetext)
+	Client:SetDiscordActivity(state, details, largeimage, largetext)
+end)
+
+Events:Subscribe("SetHighlightEnable", function(enabled, actor, color)
+	if(actor == nil) then return end
+
+	actor:SetHighlightEnabled(enabled)
+	Client:SetHighlightColor(color)
+end)
+
+Player:Subscribe("VOIP", function(player, IsTalking)
 	if (player == NanosWorld:GetLocalPlayer()) then
 		MainHUD:CallEvent("VoiceIcon", { IsTalking })
 	end
@@ -41,21 +51,11 @@ function AddOwnerCharacter(player)
 end
 
 
--- Adds a new Nametag to a character which was possessed
-Character:on("Possessed", function(character, player)
-    --AddNametag(player, character)
+Character:Subscribe("Possessed", function(character, player)
     AddOwnerCharacter(player)
 end)
 
--- Removes the Nametag from a character which was unpossessed
-Character:on("UnPossessed", function(character, player)
-    --RemoveNametag(player, character)
-end)
-
--- When a Player is spawned - for when you connect and there is already Player's connected
-Player:on("Spawn", function(player)
-   -- RemoveNametag(player)
---	AddNametag(player)
+Player:Subscribe("Spawn", function(player)
     AddOwnerCharacter(player)
 end)
 

@@ -48,7 +48,7 @@ function enew(element, class, ...)
 
 	-- Add the destruction handler
     if rawget(class, "on") then
-        self:on("Destroy", __removeElementIndex)
+        self:Subscribe("Destroy", __removeElementIndex)
 	end
 
 	return element

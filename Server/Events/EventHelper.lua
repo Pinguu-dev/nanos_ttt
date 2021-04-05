@@ -1,4 +1,4 @@
-Events:on("LeanbackAnim", function(player, status)
+Events:Subscribe("LeanbackAnim", function(player, status)
 	local character = player:GetControlledCharacter()
 	if(character == nil) then return end
 
