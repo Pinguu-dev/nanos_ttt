@@ -5,7 +5,8 @@ local DEBUG = DEBUG or false
 local classes = {
 	"Player",
 	"Vehicle",
-	"Character"
+	"Character",
+	"Weapon"
 }
 
 function enew(element, class, ...)
@@ -39,7 +40,7 @@ function enew(element, class, ...)
 			rawget(v, "virtual_constructor")(element, ...)
 		end
     end
-    
+
 	-- Call constructor
 	if rawget(class, "constructor") then
 		rawget(class, "constructor")(element, ...)
@@ -47,7 +48,7 @@ function enew(element, class, ...)
 	element.constructor = false
 
 	-- Add the destruction handler
-    if rawget(class, "on") then
+    if rawget(class, "Subscribe") then
         self:Subscribe("Destroy", __removeElementIndex)
 	end
 
@@ -127,8 +128,7 @@ function super(self)
 		end
 		self = oop.elementInfo[self]
 	end
-	-- Package:Log(inspect(self))
-	
+
 	local metatable = getmetatable(self)
 	if metatable then return metatable.__super
 	else
@@ -164,7 +164,7 @@ function superMultiple(self)
 		self = oop.elementInfo[self]
     end
     ]]
-    
+
 	local metatable = getmetatable(self)
 	if not metatable then
 		return {}
@@ -271,7 +271,7 @@ function bind(func, ...)
 			end
 
             local retValue = func(table.unpack(params))
-            
+
 			return retValue
 		end
 end
@@ -299,17 +299,41 @@ end
 -- e.g. localPlayer.foo = 12
 oop = {}
 oop.elementInfo = setmetatable({}, { __mode = "k" })
+oop.elementParent = setmetatable({}, { __mode = "k" })
 oop.elementClasses = {}
 
 oop.prepareClass = function(index)
+	--Package:Log("prepareClass, index =  " .. tostring(index) .. ", class = " .. tostring(class))
 	local mt = debug.getregistry().classes[index]
-	
+
 	local __nanos_index = mt.__index
 	local __nanos_newindex = mt.__newindex
 	local __set = mt.__set
 	local __name = mt.__name
 
+	__index = function(self, key)
+		return function(self, ...)
+			return __nanos_index(self.element, key)(self.element, ...)
+		end
+	end
+
+	__newindex = function(self, key, value)
+		__nanos_newindex(self.element, key, value)
+	end
+
 	mt.__index = function(self, key)
+		if key == "parent" then
+			oop.handled = false
+			local parent = oop.elementParent[self]
+
+			if not parent then
+				parent = setmetatable({element = self}, {__index = __index})
+				oop.elementParent[self] = parent
+			end
+
+			return parent
+		end
+
 		if not oop.handled then
 			if not oop.elementInfo[self] then
 				enew(self, oop.elementClasses[__name] or {})
@@ -320,7 +344,7 @@ oop.prepareClass = function(index)
 			end
 			oop.handled = true
 		end
-		
+
 		local value = __nanos_index(self, key)
 		oop.handled = false
 		return value

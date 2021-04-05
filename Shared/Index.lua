@@ -3,7 +3,8 @@ local files = {
     "Inspect.lua",
     "Classlib.lua",
     "Classes/Object.lua",
-    "Classes/DataObject.lua"
+    "Classes/DataObject.lua",
+    "Classes/Singleton.lua"
 }
 
 DEBUG = true

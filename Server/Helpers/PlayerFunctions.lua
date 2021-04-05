@@ -1,10 +1,3 @@
---
-NanosPlayer = Player
-Player = inherit(DataObject)
-registerElementClass("Player", Player)
---
-
-
 function Player:SetGodmode(state)
 	local char = self:GetControlledCharacter()
 	if(char == nil) then 
@@ -36,7 +29,7 @@ function Player:SetRole(role)
 
     if (role == ROLES.TRAITOR) then
 
-		Server:SendChatMessage(self, "You are now the TRAITOR!")
+		self:SendNotification("You are now the TRAITOR!")
 		print("TRAITOR")
 
 		for i,player in pairs(NanosPlayer) do
@@ -50,12 +43,12 @@ function Player:SetRole(role)
 
 	elseif (role == ROLES.DETECTIVE) then
 
-		Server:SendChatMessage(self, "You are now the DETECTIVE!")
+		self:SendNotification("You are now the DETECTIVE!")
 		print("DETECTIVE")
 
 	elseif (role == ROLES.INNOCENT) then
 
-		Server:SendChatMessage(self, "You are now the INNOCENT!")
+		self:SendNotification("You are now the INNOCENT!")
 		print("INNOCENT")
 
     end

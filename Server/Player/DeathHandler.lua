@@ -11,23 +11,23 @@ Character:Subscribe("Death", function(character)
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 
 		-- INNO WIN
-		if(Server:GetAliveTraitors() <= 0 and progressRoundEnd == false) then
+		if(Game:GetAliveTraitors() <= 0 and progressRoundEnd == false) then
 			-- Innocents haben alle Traitor getötet
 
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
 			Events:BroadcastRemote("TTT_InnoWonScreen", { true })	
 
-			Server:SendNotification("Innocent won the round")
+			Game:SendNotification("Innocent won the round")
 
-			Server:GiveRoleKarma(ROLES.INNOCENT, 30)
-			Server:RemoveRoleKarma(ROLES.TRAITOR, 30)
+			Game:GiveRoleKarma(ROLES.INNOCENT, 30)
+			Game:RemoveRoleKarma(ROLES.TRAITOR, 30)
 
 			progressRoundEnd = true
 
 			local StopRoundTimer = Timer:SetTimeout(5000, function()
 				Events:BroadcastRemote("TTT_InnoWonScreen", { false }) -- WIN wird wieder ausgeblendet
 				progressRoundEnd = false
-				TTT:StopRound()
+				Game:StopRound()
 				return false
 			end)
 
@@ -35,22 +35,22 @@ Character:Subscribe("Death", function(character)
 		end
 
 		-- TRAITOR WIN
-		if(player:GetRole() == ROLES.INNOCENT and progressRoundEnd == false and Server:GetAliveInnocents() <= 0) then
+		if(player:GetRole() == ROLES.INNOCENT and progressRoundEnd == false and Game:GetAliveInnocents() <= 0) then
 
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
 			Events:BroadcastRemote("TTT_TerrorWonScreen", { true })	
 
-			Server:SendNotification("Traitors won the round")
+			Game:SendNotification("Traitors won the round")
 
-			Server:GiveRoleKarma(ROLES.TRAITOR, 30)
-			Server:RemoveRoleKarma(ROLES.INNOCENT, 30)
+			Game:GiveRoleKarma(ROLES.TRAITOR, 30)
+			Game:RemoveRoleKarma(ROLES.INNOCENT, 30)
 
 			progressRoundEnd = true
 	
 			local StopRoundTimer = Timer:SetTimeout(5000, function()
 				Events:BroadcastRemote("TTT_TerrorWonScreen", { false }) -- Win wird wieder ausgeblendet	
 				progressRoundEnd = false
-				TTT:StopRound()
+				Game:StopRound()
 				return false
 			end)
 

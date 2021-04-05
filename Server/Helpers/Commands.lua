@@ -1,15 +1,19 @@
+RegisterServerCommand("alivetraitors", function(players, args)
+	Game:SendNotification("Alive traitors: ".. Game:GetAliveTraitors(), "error")
+end)
+
 RegisterServerCommand("stopround", function(player, args)
 	print("[Console] Round stopped by ".. player:GetName())
 
-	Server:SendNotification("The round was stopped by admin", "error")
+	Game:SendNotification("The round was stopped by admin", "error")
 
-	TTT:StopRound()
+	Game:StopRound()
 end)
 
 RegisterServerCommand("startround", function(player, args)
     print("[Console] Round started by ".. player:GetName())
     
-	TTT:StartRound()
+	Game:StartRound()
 end)
 
 RegisterServerCommand("kill", function(player, args)
@@ -93,7 +97,7 @@ RegisterServerCommand("pos", function(player, args)
 
     print("[POSITION] Saved Position: ".. dump(character:GetLocation()))
     
-    Server:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
+    Game:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
 end)
 
 RegisterServerCommand("teleport", function(player, args)

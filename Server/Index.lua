@@ -29,6 +29,19 @@ TTTSettings = {
 	min_players_detectives = 10,
 }
 
+Game = inherit(Singleton) -- new
+Game:New()
+
+function Game:constructor()
+  
+end
+
+--
+NanosPlayer = Player
+Player = inherit(DataObject)
+registerElementClass("Player", Player)
+--
+
 -- Importieren der unterschiedlichen Dateien
 Package:Require("Helpers/PlayerFunctions.lua")
 Package:Require("Helpers/ExternalFunctions.lua")
@@ -56,27 +69,27 @@ end)
 
 -- Wenn ein Spieler nicht mehr auf dem Server ist
 NanosPlayer:Subscribe("Destroy", function(player)
-	NanosServer:BroadcastChatMessage("<red>".. player:GetName() .."</> has left the server!")
+	player:SendPlayerMessage(player:GetName() .." has left the server!")
 
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 		
 		-- Wenn Terrorist das Match verlässt
 		if(player:GetRole() == ROLES.TRAITOR) then
-			TTT:StopRound()
-			NanosServer:SendNotification("The round aborted because the traitor left the game", "error")
+			Game:StopRound()
+			Game:SendNotification("The round aborted because the traitor left the game", "error")
 			return
 		end
 
 		-- Runde wird beendet wenn weniger wie zwei Spieler noch dabei sind
-		if(NanosServer:GetAlivePlayers() < 2) then
-			TTT:StopRound()
-			NanosServer:SendNotification("The round was cancelled because there are not enough players left", "error")
+		if(Game:GetAlivePlayers() < 2) then
+			Game:StopRound()
+			Game:SendNotification("The round was cancelled because there are not enough players left", "error")
 		end
 
 	end
 end)
 
-function TTT:StartRound()
+function Game:StartRound()
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then return end
 
 	TTT.match_state = MATCH_STATES.PREPAIRING 
@@ -95,10 +108,10 @@ function TTT:StartRound()
 	end	
 end
 
-function TTT:StopRound()
+function Game:StopRound()
 	if(TTT.match_state ~= MATCH_STATES.IN_PROGRESS) then return end
 
-	NanosServer:SendNotification("The round is started manually, wait for the round begin.")
+	Game:SendNotification("The round is started manually, wait for the round begin.")
 
 	-- HUD wird angepasst
 	Events:BroadcastRemote("UpdatePlayerFraction", { -1 }) -- Rolle wird auf "MATCH OVER" geändert

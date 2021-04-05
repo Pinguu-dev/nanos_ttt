@@ -17,7 +17,7 @@ Timer:SetTimeout(1000, function()
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
 			Events:BroadcastRemote("TTT_InnoWonScreen", { true })		
 
-			Server:SendNotification("Innocent have won the round, the time is over.", "success")
+			Game:SendNotification("Innocent have won the round, the time is over.", "success")
 
 			Timer:SetTimeout(5000, function()
 				Events:BroadcastRemote("TTT_InnoWonScreen", { false }) -- WIN wird wieder ausgeblendet
@@ -38,7 +38,7 @@ Timer:SetTimeout(1000, function()
 
 			if(player_count < 2) then
 				TTT.match_state = WARM_UP
-				Server:SendNotification("Not enough players to start a round", "error")
+				Game:SendNotification("Not enough players to start a round", "error")
 				return
 			end
 			

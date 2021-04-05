@@ -1,9 +1,3 @@
---
-NanosServer = Server
-Server = inherit(DataObject)
-registerElementClass("Server", Server)
---
-
 function table.Count( t )
     local i = 0
     for k in pairs( t ) do i = i + 1 end
@@ -43,7 +37,7 @@ function math.randomchoice(t)
     return table[index]
 end
 
-function Server:GetAlivePlayers() 
+function Game:GetAlivePlayers() 
     local alivePlayers = 0
     for i,player in pairs(NanosPlayer) do
         if(player:GetData("playerAlive") ~= nil) then
@@ -56,13 +50,13 @@ function Server:GetAlivePlayers()
     return alivePlayers
 end
 
-function Server:SendNotification(message, type) 
+function Game:SendNotification(message, type) 
     type = type or "info"
     Events:BroadcastRemote("SendNoti", { message, type })
 	Events:BroadcastRemote("PlaySound", { "PolygonWorld::ClickSound" })
 end
 
-function Server:GetAliveTraitors() 
+function Game:GetAliveTraitors() 
     local alivePlayers = 0
     for i,player in pairs(NanosPlayer) do
         if(player:GetAlive() == true) then
@@ -75,7 +69,7 @@ function Server:GetAliveTraitors()
     return alivePlayers
 end
 
-function Server:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
+function Game:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
     local alivePlayers = 0
     for i,player in pairs(NanosPlayer) do
         if(player:GetAlive() == true) then
@@ -88,7 +82,7 @@ function Server:GetAliveInnocents()  -- Detektive ist auch irgendwie Innocent
     return alivePlayers
 end
 
-function Server:GiveRoleKarma(role, karma) 
+function Game:GiveRoleKarma(role, karma) 
     for i,player in pairs(NanosPlayer) do
         if(player:GetRole() == role) then
             player:GiveKarma(karma)
@@ -96,7 +90,7 @@ function Server:GiveRoleKarma(role, karma)
     end
 end
 
-function Server:RemoveRoleKarma(role, karma) 
+function Game:RemoveRoleKarma(role, karma) 
     for i,player in pairs(NanosPlayer) do
         if(player:GetRole() == role) then
             player:RemoveKarma(karma)

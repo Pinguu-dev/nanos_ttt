@@ -126,8 +126,6 @@ character_meshes = {
 }
 -- Spawn System
 NanosPlayer:Subscribe("Spawn", function(player)
-	NanosServer:BroadcastChatMessage("<blue>".. player:GetName() .."</> now wait for the start of the game!")
-
 	-- Spieler wird gehalten solang eine Runde läuft
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 		-- Runde läuft bereits
