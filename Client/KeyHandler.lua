@@ -7,8 +7,6 @@ TraitorShopVisible = false
 Client:Subscribe("KeyUp", function(KeyName, _, _)
 
     if (KeyName == "L") then
-	
-		Client:CallLevelBlueprintEvent("CustomEvent")
 
       if(IsLeanback == false) then
         -- Spieler hintzen
