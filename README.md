@@ -40,12 +40,12 @@ Player:RemoveKarma(Player self, integer karma)
 ```
 New functions for server
 ```LUA
-Server:SendNotification(string message, string type) -- type is optional
-Server:GetAlivePlayers()
-Server:GetAliveTraitors()
-Server:GetAliveInnocents()
-Server:GiveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
-Server:RemoveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+Game:SendNotification(string message, string type) -- type is optional
+Game:GetAlivePlayers()
+Game:GetAliveTraitors()
+Game:GetAliveInnocents()
+Game:GiveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
+Game:RemoveRoleKarma(integer role, integer karma) -- ROLES.NONE, ROLES.TRAITOR, ROLES.INNOCENT, ROLES.DETECTIVE
 CustomChat:SendMessage(string message)
 ```
 New TTT functions
