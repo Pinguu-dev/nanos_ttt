@@ -25,7 +25,7 @@ $.notify.addStyle('grey', {
 	}
 });
 
-Events.on("UpdateWeaponAmmo", function(enable, clip, bag) {
+Events.Subscribe("UpdateWeaponAmmo", function(enable, clip, bag) {
 	if (enable)
 		$("#weapon_ammo_container").show();
 	else
@@ -35,7 +35,7 @@ Events.on("UpdateWeaponAmmo", function(enable, clip, bag) {
 	$("#weapon_ammo_bag").html("/ " + bag);
 });
 
-Events.on("UpdateHealth", function(health) {
+Events.Subscribe("UpdateHealth", function(health) {
 	$(".inner_hp_progress").html(health + " HP");
 
 	var percent = health;
@@ -45,7 +45,7 @@ Events.on("UpdateHealth", function(health) {
 	$(".progressbar_health").width(percent + '%');
 });
 
-Events.on("UpdateKarma", function(karma) {
+Events.Subscribe("UpdateKarma", function(karma) {
 	$(".inner_karma_progress").html(karma + " Karma");
 
 	var percent = karma / 10;
@@ -63,11 +63,11 @@ function secondsTimeSpanToHMS(s) {
     return (m < 10 ? '0'+m : m)+":"+(s < 10 ? '0'+s : s); 
 }
 
-Events.on("UpdateRoundTimer", function(time) {
+Events.Subscribe("UpdateRoundTimer", function(time) {
 	$(".round_time").html(secondsTimeSpanToHMS(time));
 });
 
-Events.on("UpdateFraction", function(fraction) {
+Events.Subscribe("UpdateFraction", function(fraction) {
 	if(fraction == 0) {
 		// Preparing...
 		$(".fraction").html("Preparing");
@@ -91,14 +91,14 @@ Events.on("UpdateFraction", function(fraction) {
 	}
 });
 
-Events.on("SendNotification", function(text, art) {
+Events.Subscribe("SendNotification", function(text, art) {
 	//$.notify(text, art);
 	$.notify(text, {
 		style: 'grey'
 	  });
 });
 
-Events.on("VoiceIcon", function(active) {
+Events.Subscribe("VoiceIcon", function(active) {
 	if(active) 
 		$("#voice_icon").css("display", "block")
 	else 
@@ -106,14 +106,14 @@ Events.on("VoiceIcon", function(active) {
 });
 
 // Overlays Start
-Events.on("TTT_InnoWonScreen", function(active) {
+Events.Subscribe("TTT_InnoWonScreen", function(active) {
 	if (active)
 		$("#inno_won_overlay").show();
 	else
 		$("#inno_won_overlay").hide();
 });
 
-Events.on("TTT_TerrorWonScreen", function(active) {
+Events.Subscribe("TTT_TerrorWonScreen", function(active) {
 	if (active)
 		$("#terror_won_overlay").show();
 	else
@@ -122,7 +122,7 @@ Events.on("TTT_TerrorWonScreen", function(active) {
 // Overlays End
 
 // Nametags Start
-Events.on("SetNametag", function(enabled, name, color, health) {
+Events.Subscribe("SetNametag", function(enabled, name, color, health) {
 	if (enabled) {
 		$("#ttt_nametag").show();
 		$("#ttt_nametag .name").html(name);
