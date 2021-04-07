@@ -10,17 +10,17 @@ let chat =
 	hide_chat: 15*1000 // 15 - seconds
 };
 
-Events.on("PushChat", function(msg) {
+Events.Subscribe("PushChat", function(msg) {
 	chatAPI.push(msg);
 	show();
 });
 
-Events.on("CallEnableChatInput", function() {
+Events.Subscribe("CallEnableChatInput", function() {
 	enableChatInput(true);
 	show();
 });
 
-Events.on("CloseChatInput", function() {
+Events.Subscribe("CloseChatInput", function() {
 	enableChatInput(false);
 	hide();
 });
