@@ -66,13 +66,26 @@ Timer:SetTimeout(1000, function()
 				-- Charakter Einstellungen
 
 				player:SetGodmode(false)					
-                Events:CallRemote("ResetHeal", player, { 100 })
+               			Events:CallRemote("ResetHeal", player, { 100 })
 
 				-- Ende
 
 				print(player)
+			end				
+			-- Ende
+				
+			for i,player in pairs(NanosPlayer) do
+				if(player:GetRole() == ROLES.TRAITOR) then
+						
+					-- Find all Traitors
+					for a,traitors in pairs(NanosPlayer) do
+						if(traitors:GetRole() == ROLES.TRAITOR and traitors ~= player) then
+							player:SetHighlight(true, self:GetControlledCharacter(), Color(1, 0.25, 0, 0) * 10)		
+						end
+					end
+					
+				end
 			end
-			-- Ende 		
 
 		end
 	end
