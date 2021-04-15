@@ -8,7 +8,7 @@ Character:Subscribe("Death", function(character)
 	player:SetVOIPMuted(true)	
 	player:SetAlive(false)
 	
-	if(player:GetData("TTT_LastDamager") not nil and player:GetData("TTT_LastDamager") not player) then
+	if(player:GetData("TTT_LastDamager") ~= nil and player:GetData("TTT_LastDamager") ~= player) then
 		player:SetSpectating(player:GetData("TTT_LastDamager"))
 	end
 	
