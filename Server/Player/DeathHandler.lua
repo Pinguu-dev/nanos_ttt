@@ -66,8 +66,6 @@ Character:Subscribe("Death", function(character)
 
 			local lastDamagePlayer = player:GetData("TTT_LastDamager")
             		if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end			
-			
-			player:SetSpectating(lastDamagePlayer)
 
 			if(lastDamagePlayer:GetRole() ~= ROLES.INNOCENT) then return end
 			lastDamagePlayer:RemoveKarma(50) -- Innocent der diesen Spieler getötet hat, verliert 50 Karma
