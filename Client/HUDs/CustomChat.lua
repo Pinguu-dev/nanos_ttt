@@ -32,10 +32,12 @@ ChatUI:Subscribe("ChangeChatState", function(state)
 	if(state == true) then		
 		if(char ~= nil) then 
 			char:SetMovementEnabled(false)
+			Package::Log("Movement disabled, Chat open")
 		end
 	else
 		if(char ~= nil) then 
 			char:SetMovementEnabled(true)
+			Package::Log("Movement again enabled, Chat closed")
 		end
 	end
 
