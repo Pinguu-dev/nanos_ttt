@@ -13,9 +13,20 @@ Timer:SetTimeout(130, function()
 		if (actor:GetType() == "Character") then	
 			if(actor:GetPlayer() == NanosWorld:GetLocalPlayer()) then return end
 
+			local ownRole = NanosWorld:GetLocalPlayer():GetData("playerRole")
+			local actorRole = actor:GetPlayer():GetData("playerRole")
+			if(ownRole == nil) then
+				Package:Log("Error ownRole")		
+			end
+				
 			if (not showNametag) then
-				local owner = actor:GetValue("characterOwner")		  
-				MainHUD:CallEvent("SetNametag", { true, owner:GetName(), "#fff", actor:GetHealth() })
+				local owner = actor:GetValue("characterOwner")		
+				if(ownRole == 2 and actorRole == 2) then
+					MainHUD:CallEvent("SetNametag", { true, owner:GetName() .. " (Traitor)", "#fff", actor:GetHealth() })	
+				else
+					MainHUD:CallEvent("SetNametag", { true, owner:GetName(), "#fff", actor:GetHealth() })
+				end
+				
 				showNametag = true
 			end
 		end
