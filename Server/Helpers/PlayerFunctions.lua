@@ -30,16 +30,7 @@ function Player:SetRole(role)
     if (role == ROLES.TRAITOR) then
 
 		self:SendNotification("You are now the TRAITOR!")
-		print("TRAITOR")
-
-		for i,player in pairs(NanosPlayer) do
-			if(player:GetRole() ~= ROLES.TRAITOR) then
-				-- EinfachMax CHEATING xD
-				if(player:GetName() == "EinfachMax") then
-					player:SetHighlight(true, self:GetControlledCharacter(), Color(1, 0.25, 0, 0) * 10)
-				end
-			end
-		end	
+		print("TRAITOR")			
 
 	elseif (role == ROLES.DETECTIVE) then
 
