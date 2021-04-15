@@ -41,11 +41,18 @@ Timer:SetTimeout(1000, function()
 				Game:SendNotification("Not enough players to start a round", "error")
 				return
 			end
+				
+			local player_list = {}
+			for k, player in pairs(NanosPlayer) do
+				math.randomseed(os.time())
+				local pos = math.random(1, #player_list + 1)
+				table.insert(player_list, pos, player)
+			end
 			
 			local traitor_count = math.ceil(player_count * TTTSettings.percent_traitors)
 			local detective_count = math.ceil(player_count * TTTSettings.percent_detectives)
 
-			for k, player in pairs(NanosPlayer) do
+			for k, player in pairs(player_list) do
 				if (k <= traitor_count) then
 					player:SetRole(ROLES.TRAITOR)				
 					print("[INFO] ".. player:GetName() .." is traitor")
