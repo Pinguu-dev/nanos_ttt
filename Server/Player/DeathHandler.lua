@@ -4,6 +4,9 @@ Character:Subscribe("Death", function(character)
 	local player = character:GetPlayer()
 	if(player == nil) then return end
 
+	local destroyWeapon = player:GetData("player_weapon")
+	destroyWeapon:Destroy() -- Waffe wird zerstört
+
 	player:UnPossess()
 	player:SetVOIPSetting(VOIPSetting.Muted)
 	player:SetAlive(false)

@@ -22,8 +22,8 @@ TTT = {
 }
 
 TTTSettings = {
-	preparing_time = 15, 
-	match_time = 360, 
+	preparing_time = 15,
+	match_time = 360,
 	percent_traitors = 0.25,
 	percent_detectives = 0.13,
 	min_players_detectives = 10,
@@ -33,7 +33,7 @@ Game = inherit(Singleton) -- new
 Game:New()
 
 function Game:constructor()
-  
+
 end
 
 --
@@ -46,6 +46,7 @@ registerElementClass("Player", Player)
 Package:Require("Helpers/PlayerFunctions.lua")
 Package:Require("Helpers/ExternalFunctions.lua")
 Package:Require("Helpers/MapSpawns.lua")
+Package:Require("Helpers/WeaponHandler.lua")
 Package:Require("Helpers/ChatHandler.lua")
 Package:Require("Events/EventHelper.lua")
 Package:Require("Player/DeathHandler.lua")
@@ -56,9 +57,6 @@ Package:Require("Helpers/CommandHandler.lua")
 Package:Require("Helpers/Commands.lua")
 Package:Require("Traitor/TraitorShop.lua")
 Package:Require("Player/DamageHandler.lua")
-
--- Spawn all Weapons
-SpawnWeaponsInWorld()
 
 -- Charakter wird gelöscht, wenn der Charakter vom Spieler getrennt wird und er Disconnected ist
 NanosPlayer:Subscribe("UnPossess", function(player, character, is_player_disconnecting)
@@ -72,7 +70,7 @@ NanosPlayer:Subscribe("Destroy", function(player)
 	player:SendPlayerMessage(player:GetName() .." has left the server!")
 
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
-		
+
 		-- Wenn Terrorist das Match verlässt
 		if(player:GetRole() == ROLES.TRAITOR) then
 			Game:StopRound()
@@ -92,7 +90,7 @@ end)
 function Game:StartRound()
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then return end
 
-	TTT.match_state = MATCH_STATES.PREPAIRING 
+	TTT.match_state = MATCH_STATES.PREPAIRING
 	TTT.remaining_time = TTTSettings.preparing_time
 
 	Events:BroadcastRemote("UpdatePlayerFraction", { ROLES.NONE }) -- Spieler Rolle auf keine Rolle zurücksetzen
@@ -105,7 +103,7 @@ function Game:StartRound()
 
 		player:SendNotification("A new round begins in 30 secounds. Prepare yourself.")
 		player:SendNotification("Your Karma is ".. karma ..". As a result all damage you deal is reduced by ".. damageReduce .."%")
-	end	
+	end
 end
 
 function Game:StopRound()
@@ -129,7 +127,7 @@ function Game:StopRound()
 			-- Charakter wird freigegeben
 			if(character:GetPlayer() == nil) then
 				character:Destroy()
-			end		
+			end
 		end
 	end
 
@@ -139,9 +137,9 @@ function Game:StopRound()
 		player:SetVOIPMuted(false) -- Spieler darf wieder sprechen
 		player:SetAlive(true) -- Spieler ist wieder am Leben
 		player:SetUnspectating() -- Spieler wird wieder zurückgesetzt
-	
+
 		-- Charakter für die Toten erstellen
-		local char = nil		
+		local char = nil
 		if(player:GetControlledCharacter() == nil) then
 			char = player:SpawnCharacter()
 		else
@@ -154,5 +152,5 @@ function Game:StopRound()
 
     	Events:CallRemote("ResetHeal", player, { 9999 })
 	end
-	
+
 end

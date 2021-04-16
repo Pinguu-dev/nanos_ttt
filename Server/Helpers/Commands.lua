@@ -12,7 +12,7 @@ end)
 
 RegisterServerCommand("startround", function(player, args)
     print("[Console] Round started by ".. player:GetName())
-    
+
 	Game:StartRound()
 end)
 
@@ -22,15 +22,7 @@ RegisterServerCommand("kill", function(player, args)
 
     print("[INFO] ".. player:GetName() .. " killed with command")
 
-	character:SetHealth(0)    
-end)
-
-RegisterServerCommand("spawnweapons", function(player, args)
-    print("[INFO] Weapons spawned by ".. player:GetName())
-
-	SpawnWeaponsInWorld()
-
-	player:SendNotification("You spawn all weapons in the world")
+	character:SetHealth(0)
 end)
 
 RegisterServerCommand("spawnvehicles", function(player, args)
@@ -74,7 +66,7 @@ RegisterServerCommand("play", function(player, args)
     end
 
     player:SetData("lastAnim", anim)
-    
+
     character:PlayAnimation("PolygonWorld::".. anim, 0, true)
 
     player:SendNotification("[ANIMATION] PolygonWorld::".. anim)
@@ -96,8 +88,8 @@ RegisterServerCommand("pos", function(player, args)
 	if(character == nil) then return end
 
     print("[POSITION] Saved Position: ".. dump(character:GetLocation()))
-    
-    Game:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
+
+    Server:SendChatMessage(player, "[POSITION] Saved Position: ".. dump(character:GetLocation()))
 end)
 
 RegisterServerCommand("teleport", function(player, args)
