@@ -14,7 +14,7 @@ NanosWorldVehicles = {
 
 		vehicle:SetWheel(0, "Wheel_Front_Left",  35, 22, 50, 20, 0.25, 2, 17, 1000, 50, 50, 10)
 		vehicle:SetWheel(1, "Wheel_Front_Right", 35, 22, 50, 20, 0.25, 2, 17, 1000, 50, 50, 10)
-		vehicle:SetWheel(2, "Wheel_Rear_Left",   35, 22,  0, 20, 0.25, 2, 17, 1000, 50, 50, 10) 
+		vehicle:SetWheel(2, "Wheel_Rear_Left",   35, 22,  0, 20, 0.25, 2, 17, 1000, 50, 50, 10)
 		vehicle:SetWheel(3, "Wheel_Rear_Right",  35, 22,  0, 20, 0.25, 2, 17, 1000, 50, 50, 10)
 
 		vehicle:SetDoor(0, Vector( 22, -80, 120), Vector(-18, -47, 110), Rotator(0, 0, 15), 75, -150)
@@ -129,11 +129,11 @@ NanosPlayer:Subscribe("Spawn", function(player)
 	-- Spieler wird gehalten solang eine Runde läuft
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 		-- Runde läuft bereits
-		Events:CallRemote("TTT_StartScreen", player, { true })	
-		Events:CallRemote("UpdatePlayerFraction", player, { -1 })	
+		Events:CallRemote("TTT_StartScreen", player, { true })
+		Events:CallRemote("UpdatePlayerFraction", player, { -1 })
 
 		Timer:SetTimeout(5000, function()
-			Events:CallRemote("TTT_StartScreen", player, { false })	
+			Events:CallRemote("TTT_StartScreen", player, { false })
 			return false
 		end)
 
@@ -153,24 +153,24 @@ NanosPlayer:Subscribe("Spawn", function(player)
 
     if(new_char == nil) then -- Spieler kontrolliert keinen Charakter mehr
         player:SpawnCharacter()
-    end   
+    end
 
 	-- Random aussehen
 	player:SetVOIPChannel(1) -- Setzt den Spieler in den richtigen Voice-Chat
-	player:SetVOIPSetting(VOIPSetting.Muted) -- Spieler ist nicht gestummt, er lebt!	
-    
+	player:SetVOIPSetting(VOIPSetting.Muted) -- Spieler ist nicht gestummt, er lebt!
+
     -- Karma System
 	player:SetKarma(1000)
 
     -- Unverwundbar machen
 	player:SetGodmode(true)
-	
+
 	-- Start-Screen nur kurz anzeigen
-	Events:CallRemote("TTT_StartScreen", player, { true })	
-	Events:CallRemote("UpdatePlayerFraction", player, { -1 })	
+	Events:CallRemote("TTT_StartScreen", player, { true })
+	Events:CallRemote("UpdatePlayerFraction", player, { -1 })
 
 	Timer:SetTimeout(5000, function()
-		Events:CallRemote("TTT_StartScreen", player, { false })	
+		Events:CallRemote("TTT_StartScreen", player, { false })
 		return false
 	end)
 

@@ -31,7 +31,7 @@ end)
 Events:Subscribe("ResetHeal", function(heal)
 	Timer:SetTimeout(5000, function()
 		local character = NanosWorld:GetLocalPlayer():GetControlledCharacter()
-		if(character ~= nil) then 
+		if(character ~= nil) then
 			UpdateHealth(heal)
 			return false
 		end
@@ -42,6 +42,9 @@ end)
 function UpdateLocalCharacter(character)
 	-- Verifies if character is not nil (eg. when GetControllerCharacter() doesn't return a character)
 	if (character == nil) then return end
+
+	-- Idk but if i spawn to fast it will be drops a error
+	if(character:GetHealth() == nil) then return end
 
 	-- Updates the UI with the current character's health
 	UpdateHealth(character:GetHealth())

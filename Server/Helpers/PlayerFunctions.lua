@@ -1,19 +1,19 @@
 function Player:SetGodmode(state)
 	local char = self:GetControlledCharacter()
-	if(char == nil) then 
+	if(char == nil) then
 		print("[ERROR] `SetGodmode` can't find the searched character'")
 		return
 	end
 
 	if(state == true) then
 		char:SetTeam(1)
-		char:SetMaxHealth(9999)  
-		char:SetHealth(9999) 
+		char:SetMaxHealth(9999)
+		char:SetHealth(9999)
 		Events:CallRemote("ResetHeal", self, { 9999 })
-	else 
+	else
 		char:SetTeam(0)
-		char:SetMaxHealth(100)  
-		char:SetHealth(100) 
+		char:SetMaxHealth(100)
+		char:SetHealth(100)
 		Events:CallRemote("ResetHeal", self, { 100 })
 	end
 end
@@ -30,7 +30,7 @@ function Player:SetRole(role)
     if (role == ROLES.TRAITOR) then
 
 		self:SendNotification("You are now the TRAITOR!")
-		print("TRAITOR")			
+		print("TRAITOR")
 
 	elseif (role == ROLES.DETECTIVE) then
 
@@ -43,7 +43,7 @@ function Player:SetRole(role)
 		print("INNOCENT")
 
     end
-    
+
     Events:CallRemote("UpdatePlayerFraction", self, { role })
 end
 
@@ -91,7 +91,7 @@ function Player:RemoveKarma(karma)
 
     local newKarma = currentKarma - karma
 
-    if(newKarma < 0) then 
+    if(newKarma < 0) then
         newKarma = 0
     end
 
@@ -109,8 +109,8 @@ function Player:SpawnCharacter()
 
     local new_char = Character(spawnLocation, Rotator(), character_meshes[math.random(#character_meshes)])
     new_char:SetInitialLocation(spawnLocation)
-    
-    self:Possess(new_char) 
+
+    self:Possess(new_char)
 
 	new_char:SetScale(Vector(0.9, 0.9, 0.9))
 

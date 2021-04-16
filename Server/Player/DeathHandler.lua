@@ -5,13 +5,13 @@ Character:Subscribe("Death", function(character)
 	if(player == nil) then return end
 
 	player:UnPossess()
-	player:SetVOIPMuted(true)	
+	player:SetVOIPSetting(VOIPSetting.Muted)
 	player:SetAlive(false)
-	
+
 	if(player:GetData("TTT_LastDamager") ~= nil and player:GetData("TTT_LastDamager") ~= player) then
 		player:SetSpectating(player:GetData("TTT_LastDamager"))
 	end
-	
+
 	if(TTT.match_state == MATCH_STATES.IN_PROGRESS) then
 
 		-- INNO WIN
@@ -19,7 +19,7 @@ Character:Subscribe("Death", function(character)
 			-- Innocents haben alle Traitor getötet
 
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
-			Events:BroadcastRemote("TTT_InnoWonScreen", { true })	
+			Events:BroadcastRemote("TTT_InnoWonScreen", { true })
 
 			Game:SendNotification("Innocent won the round")
 
@@ -42,7 +42,7 @@ Character:Subscribe("Death", function(character)
 		if(player:GetRole() == ROLES.INNOCENT and progressRoundEnd == false and Game:GetAliveInnocents() <= 0) then
 
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
-			Events:BroadcastRemote("TTT_TerrorWonScreen", { true })	
+			Events:BroadcastRemote("TTT_TerrorWonScreen", { true })
 
 			Game:SendNotification("Traitors won the round")
 
@@ -50,9 +50,9 @@ Character:Subscribe("Death", function(character)
 			Game:RemoveRoleKarma(ROLES.INNOCENT, 30)
 
 			progressRoundEnd = true
-	
+
 			local StopRoundTimer = Timer:SetTimeout(5000, function()
-				Events:BroadcastRemote("TTT_TerrorWonScreen", { false }) -- Win wird wieder ausgeblendet	
+				Events:BroadcastRemote("TTT_TerrorWonScreen", { false }) -- Win wird wieder ausgeblendet
 				progressRoundEnd = false
 				Game:StopRound()
 				return false
@@ -65,11 +65,11 @@ Character:Subscribe("Death", function(character)
 		if(player:GetRole() ~= ROLES.TRAITOR) then
 
 			local lastDamagePlayer = player:GetData("TTT_LastDamager")
-            		if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end			
+            		if(lastDamagePlayer == nil or lastDamagePlayer == player) then return end
 
 			if(lastDamagePlayer:GetRole() ~= ROLES.INNOCENT) then return end
 			lastDamagePlayer:RemoveKarma(50) -- Innocent der diesen Spieler getötet hat, verliert 50 Karma
            		lastDamagePlayer:SendNotification("You lost 50 Karma because you killed a innocent")
-		end		
+		end
 	end
 end)
