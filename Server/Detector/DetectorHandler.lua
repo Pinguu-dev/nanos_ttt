@@ -7,7 +7,7 @@ local DetectorTrigger = Trigger(Vector(-7225,761,53), 100, true)
 local LightIsCreated = false
 
 DetectorTrigger:Subscribe("BeginOverlap", function(actor)
-    if(actor:GetType() ~= "Character") then return end  
+    if(actor:GetType() ~= "Character") then return end
     if(LightIsCreated == true) then return end
 
     local player = actor:GetPlayer()
@@ -26,13 +26,13 @@ DetectorTrigger:Subscribe("BeginOverlap", function(actor)
 
     local DetectorLight = Light(
         locations,
-        Rotator(0, 90, 90), 
-        color, 
-        0, 
+        Rotator(0, 90, 90),
+        color,
+        0,
         50, 
-        250, 
-        0, 
-        0, 
+        250,
+        0,
+        0,
         false,
         true
     )
