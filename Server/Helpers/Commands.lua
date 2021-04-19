@@ -94,7 +94,7 @@ end)
 
 RegisterServerCommand("teleport", function(player, args)
     local char = player:GetControlledCharacter()
-    char:SetLocation(Vector(-2700.62, -2365.31, 87.00))
+    char:SetLocation(Vector(-2200, 2850, 15))
 end)
 
 RegisterServerCommand("settraitor", function(player, args)
@@ -128,4 +128,14 @@ RegisterServerCommand("radar", function(player, args)
     Events:CallRemote("ShowRadar", player, {})
 
     player:SendPlayerMessage("Show radar")
+end)
+
+RegisterServerCommand("spawnobj", function(player, args)
+	local static_mesh = StaticMesh(
+		Vector(-2200, 2850, 10),
+		player:GetControlledCharacter():GetRotation(),
+		"NanosWorld::SM_Crate_07"
+	)
+
+	static_mesh:SetValue("owner", player, true)
 end)

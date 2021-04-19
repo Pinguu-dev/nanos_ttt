@@ -7,8 +7,21 @@ Timer:SetTimeout(130, function()
 
 	local trace_result = Client:Trace(viewport.Position, viewport.Position + viewport.Direction * 10000, false)
 
+	if(trace_result.Actor) then
+		local actor = trace_result.Actor
+		if(actor:GetType() == "StaticMesh" and actor:GetValue("owner") ~= nil) then
+			Package:Log("ITS MINE! ".. actor:GetValue("owner"):GetName())
+			NanosWorld:GetLocalPlayer():SetValue("DragableObject", actor, true)
+		else
+			--Package:Log("NOT MINE!")
+			--NanosWorld:GetLocalPlayer():SetValue("DragableObject", nil)
+		end
+	end
+
 	if (trace_result.Actor) then
 		local actor = trace_result.Actor
+
+		--Package:Log("Result Type: ".. actor:GetType())
 
 		if (actor:GetType() == "Character") then
 			if(actor:GetPlayer() == NanosWorld:GetLocalPlayer()) then return end

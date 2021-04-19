@@ -139,7 +139,9 @@ props = {
 
 	-- Cones und so
 	--Prop(Vector(-2200, 2200, 10), Rotator(0, 44, 0), "PolygonWorld::SM_Prop_Cone_01"),
-	Prop(Vector(-2200, 2850, 10), Rotator(0, 74, 0), "PolygonWorld::SM_Prop_Cone_01"),
+
+	
+	--Prop(Vector(-2200, 2850, 10), Rotator(0, 74, 0), "PolygonWorld::SM_Prop_Cone_01"),
 	Prop(Vector(-2550, 2850, 10), Rotator(0, 45, 0), "PolygonWorld::SM_Prop_Cone_01"),
 	Prop(Vector(-2200, 2650, 10), Rotator(0, 14, 0), "PolygonWorld::SM_Prop_Cone_01"),
 	Prop(Vector(-2550, 2250, 10), Rotator(0, -30, 0), "PolygonWorld::SM_Prop_Cone_01"),

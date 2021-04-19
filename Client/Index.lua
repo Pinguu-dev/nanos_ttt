@@ -1,7 +1,7 @@
 Package:Require("KeyHandler.lua")
 Package:Require("HUDs/MainHud.lua")
 Package:Require("Traitor/TraitorShop.lua")
-Package:Require("HUDs/Nametag.lua")
+Package:Require("HUDs/ViewPort.lua")
 Package:Require("HUDs/CustomChat.lua")
 --Package:Require("HUDs/TraitorRadar.lua")
 
@@ -58,4 +58,3 @@ end)
 Player:Subscribe("Spawn", function(player)
     AddOwnerCharacter(player)
 end)
-
