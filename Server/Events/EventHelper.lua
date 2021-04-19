@@ -19,6 +19,7 @@ Events:Subscribe("LeanbackAnim", function(player, status)
 
 end)
 
-Events:Subscribe("Viewport_SV_MoveableObject", function(player, valueTest, actor)
-	actor:SetLocation(Vector(valueTest.X, valueTest.Y, valueTest.Z))
+Events:Subscribe("Viewport_SV_MoveableObject", function(player, valueTest, actor, delta_time)
+	movePos = Vector(valueTest.X, valueTest.Y, valueTest.Z)
+	actor:SetLocation(movePos)
 end)

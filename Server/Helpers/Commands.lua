@@ -139,3 +139,9 @@ RegisterServerCommand("spawnobj", function(player, args)
 
 	static_mesh:SetValue("owner", player, true)
 end)
+
+RegisterServerCommand("telobj", function(player, args)
+	local location = player:GetValue("DragableObject"):GetLocation()
+
+	player:GetControlledCharacter():SetLocation(location)
+end)
