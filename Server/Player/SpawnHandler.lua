@@ -54,12 +54,7 @@ NanosPlayer:Subscribe("Spawn", function(player)
 	player:SetKarma(1000)
 
     -- Unverwundbar machen
-	player:SetGodmode(true)
-
-	-- Spieler bekommt eine Waffe (Random)
-	local playerWeapon = GiveRandomWeapon(Vector(), Rotator())
-	player:SetData("player_weapon", playerWeapon)
-	new_char:PickUp(playerWeapon)
+	player:SetGodmode(true)	
 
 	-- Start-Screen nur kurz anzeigen
 	Events:CallRemote("TTT_StartScreen", player, { true })

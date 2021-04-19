@@ -15,7 +15,7 @@ Timer:SetTimeout(1000, function()
 			-- Runde ist abgelaufen
 
 			Events:BroadcastRemote("UpdatePlayerFraction", { -1 })
-			Events:BroadcastRemote("TTT_InnoWonScreen", { true })		
+			Events:BroadcastRemote("TTT_InnoWonScreen", { true })
 
 			Game:SendNotification("Innocent have won the round, the time is over.", "success")
 
@@ -24,14 +24,14 @@ Timer:SetTimeout(1000, function()
 
 				StopRound()
 				return false
-			end)	
+			end)
 		elseif(TTT.remaining_time <= 0 and TTT.match_state == MATCH_STATES.PREPAIRING) then
 			-- PREPAIRING ist abgelaufen
 			Events:BroadcastRemote("PlaySound", { "PolygonWorld::RoundSound" }) -- Signalton
-			
+
 			TTT.match_state = MATCH_STATES.IN_PROGRESS
-			TTT.remaining_time = TTTSettings.match_time			
-			
+			TTT.remaining_time = TTTSettings.match_time
+
 			-- Rollen verteilen
 
 			local player_count = #NanosPlayer
@@ -41,49 +41,54 @@ Timer:SetTimeout(1000, function()
 				Game:SendNotification("Not enough players to start a round", "error")
 				return
 			end
-				
+
 			local player_list = {}
 			for k, player in pairs(NanosPlayer) do
 				math.randomseed(os.time())
 				local pos = math.random(1, #player_list + 1)
 				table.insert(player_list, pos, player)
 			end
-			
+
 			local traitor_count = math.ceil(player_count * TTTSettings.percent_traitors)
 			local detective_count = math.ceil(player_count * TTTSettings.percent_detectives)
 
 			for k, player in pairs(player_list) do
 				if (k <= traitor_count) then
-					player:SetRole(ROLES.TRAITOR)				
+					player:SetRole(ROLES.TRAITOR)
 					print("[INFO] ".. player:GetName() .." is traitor")
 				elseif (player_count >= TTTSettings.min_players_detectives and k <= traitor_count + detective_count) then
-					player:SetRole(ROLES.DETECTIVE)	
+					player:SetRole(ROLES.DETECTIVE)
 					print("[INFO] ".. player:GetName() .." is detective")
 				else
-					player:SetRole(ROLES.INNOCENT)	
+					player:SetRole(ROLES.INNOCENT)
 				end
 
 				-- Charakter Einstellungen
 
-				player:SetGodmode(false)					
-               			Events:CallRemote("ResetHeal", player, { 100 })
+				player:SetGodmode(false)
+   			Events:CallRemote("ResetHeal", player, { 100 })
+
+				-- Spieler bekommt eine Waffe (Random)
+				local playerWeapon = GiveRandomWeapon(Vector(), Rotator())
+				player:SetData("player_weapon", playerWeapon)
+				new_char:PickUp(playerWeapon)
 
 				-- Ende
 
 				print(player)
-			end				
+			end
 			-- Ende
-				
+
 			for i,player in pairs(NanosPlayer) do
 				if(player:GetRole() == ROLES.TRAITOR) then
-						
+
 					-- Find all Traitors
 					for a,traitors in pairs(NanosPlayer) do
 						if(traitors:GetRole() == ROLES.TRAITOR and traitors ~= player) then
-							player:SetHighlight(true, self:GetControlledCharacter(), Color(1, 0.25, 0, 0) * 10)		
+							player:SetHighlight(true, self:GetControlledCharacter(), Color(1, 0.25, 0, 0) * 10)
 						end
 					end
-					
+
 				end
 			end
 

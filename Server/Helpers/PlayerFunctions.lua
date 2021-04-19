@@ -26,6 +26,7 @@ end
 
 function Player:SetRole(role)
     self:SetData("playerRole", role)
+		self:SetValue("syncedPlayerRole", role, true)
 
     if (role == ROLES.TRAITOR) then
 
