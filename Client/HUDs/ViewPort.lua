@@ -2,49 +2,56 @@
 local showNametag = false
 
 Timer:SetTimeout(130, function()
+
 	local newViewPort = Vector2D(Render:GetViewportSize().X / 2, Render:GetViewportSize().Y / 2)
 	local viewport = Render:Deproject(newViewPort)
+	local player = NanosWorld:GetLocalPlayer()
 
-	local trace_result = Client:Trace(viewport.Position, viewport.Position + viewport.Direction * 10000, false)
+	-- Tracer for Object-Dragging
+	local objectTracer = Client:Trace(viewport.Position, viewport.Position + viewport.Direction * 10000, CollisionChannel.WorldStatic, false, true, false, false)
 
-	if(trace_result.Actor) then
-		local actor = trace_result.Actor
-		if(actor:GetType() == "StaticMesh" and actor:GetValue("owner") ~= nil) then
-			Package:Log("ITS MINE! ".. actor:GetValue("owner"):GetName())
-			NanosWorld:GetLocalPlayer():SetValue("DragableObject", actor, true)
-		else
-			--Package:Log("NOT MINE!")
-			--NanosWorld:GetLocalPlayer():SetValue("DragableObject", nil)
+	if(objectTracer.Entity and objectTracer.Success) then
+		local actor = objectTracer.Entity;
+
+		if(actor:GetType() == "StaticMesh" and actor:GetValue("DragableObject") ~= nil) then
+
+
+			-- Er sieht das Objekt, er darf es jetzt bewegen!
+			player:SetValue("LookAtMovableProp", actor) -- Ich schaue auf ein bewegbares Objekt und setze den Aktor in eine Value
+
 		end
+	elseif(player:GetValue("LookAtMovableProp") ~= nil) then
+
+		player:SetValue("LookAtMovableProp", nil)
+
 	end
 
-	if (trace_result.Actor) then
-		local actor = trace_result.Actor
+	-- Tracer for Character Nametags
+	local characterTracer = Client:Trace(viewport.Position, viewport.Position + viewport.Direction * 10000, CollisionChannel.Mesh, false, true, false, false)
+	if(characterTracer.Entity) then
+		local actor = characterTracer.Entity
 
-		--Package:Log("Result Type: ".. actor:GetType())
+		if(actor:GetType() == "Character") then
 
-		if (actor:GetType() == "Character") then
 			if(actor:GetPlayer() == NanosWorld:GetLocalPlayer()) then return end
 
-			if (not showNametag) then
-				local owner = actor:GetValue("characterOwner")
+			local myRole = NanosWorld:GetLocalPlayer():GetValue("syncedPlayerRole")
+			local owner = actor:GetValue("characterOwner")
 
-				if(NanosWorld:GetLocalPlayer():GetValue("syncedPlayerRole") == 2) then -- TRAITOR
-					if(actor:GetValue("syncedPlayerRole") == 2) then
-						MainHUD:CallEvent("SetNametag", { true, owner:GetName().. " <font style='color: red;'>(Traitor)</font>", "#fff", actor:GetHealth() })
-					else
-						MainHUD:CallEvent("SetNametag", { true, owner:GetName().. " <font style='color: green;'>(Innocent)</font>", "#fff", actor:GetHealth() })
-					end
-
+			if(myRole == 2) then -- Traitor
+				if(actor:GetValue("syncedPlayerRole") == 2) then
+					MainHUD:CallEvent("SetNametag", { true, owner:GetName().. " <font style='color: red;'>(Traitor)</font>", "#fff", actor:GetHealth() })
 				else
-					MainHUD:CallEvent("SetNametag", { true, owner:GetName(), "#fff", actor:GetHealth() })
+					MainHUD:CallEvent("SetNametag", { true, owner:GetName().. " <font style='color: green;'>(Innocent)</font>", "#fff", actor:GetHealth() })
 				end
-
-				showNametag = true
+			else
+				MainHUD:CallEvent("SetNametag", { true, owner:GetName(), "#fff", actor:GetHealth() })
 			end
+
+			showNametag = true
 		end
 	elseif (showNametag) then
-		MainHUD:CallEvent("SetNametag", {false})
+		MainHUD:CallEvent("SetNametag", { false })
 		showNametag = false
 	end
 end)

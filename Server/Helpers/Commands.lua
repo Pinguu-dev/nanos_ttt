@@ -133,11 +133,23 @@ end)
 RegisterServerCommand("spawnobj", function(player, args)
 	local static_mesh = StaticMesh(
 		Vector(-2200, 2850, 10),
-		player:GetControlledCharacter():GetRotation(),
+		Rotator(),
 		"NanosWorld::SM_Crate_07"
 	)
 
-	static_mesh:SetValue("owner", player, true)
+	static_mesh:SetGravityEnabled(true)
+
+	static_mesh:SetValue("DragableObject", true, true)
+end)
+
+
+RegisterServerCommand("spawnobj2", function(player, args)
+	local my_prop = Prop(
+  Vector(-2200, 2850, 10),
+	Rotator(),
+  "NanosWorld::SM_Crate_07", CollisionType.Normal, false, true)
+
+	--static_mesh:SetValue("DragableObject", true, true)
 end)
 
 RegisterServerCommand("telobj", function(player, args)

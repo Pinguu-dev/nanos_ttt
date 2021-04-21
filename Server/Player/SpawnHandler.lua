@@ -1,11 +1,11 @@
 -- Spawn Locations
 spawn_locations = {
-	Vector(-2730, 2130, 130),
-	Vector(-5591.487793,1699.645752,93.094238),
-	Vector(-5881.487793,3759.645752,93.094238),
-	Vector(-8286.16015625, 1500.3731689453, 89.984214782715),
-	Vector(-7305.3051757812, 5786.8920898438, 89.984230041504),
-	Vector(-3640.5212402344, 5715.294921875, 89.984230041504)
+	Vector(-2730, 2130, 130)
+	--Vector(-5591.487793,1699.645752,93.094238),
+	--Vector(-5881.487793,3759.645752,93.094238),
+	--Vector(-8286.16015625, 1500.3731689453, 89.984214782715),
+	--Vector(-7305.3051757812, 5786.8920898438, 89.984230041504),
+	--Vector(-3640.5212402344, 5715.294921875, 89.984230041504)
 }
 
 -- Meshes
@@ -54,7 +54,7 @@ NanosPlayer:Subscribe("Spawn", function(player)
 	player:SetKarma(1000)
 
     -- Unverwundbar machen
-	player:SetGodmode(true)	
+	player:SetGodmode(true)
 
 	-- Start-Screen nur kurz anzeigen
 	Events:CallRemote("TTT_StartScreen", player, { true })
